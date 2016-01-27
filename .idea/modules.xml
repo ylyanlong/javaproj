@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javaproj.iml" filepath="$PROJECT_DIR$/javaproj.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jsonprac/jsonprac.iml" filepath="$PROJECT_DIR$/jsonprac/jsonprac.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mydb/mydb.iml" filepath="$PROJECT_DIR$/mydb/mydb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myjunit2/myjunit2.iml" filepath="$PROJECT_DIR$/myjunit2/myjunit2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mylog1/mylog1.iml" filepath="$PROJECT_DIR$/mylog1/mylog1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socket/socket.iml" filepath="$PROJECT_DIR$/socket/socket.iml" />
+    </modules>
+  </component>
+</project>

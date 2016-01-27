@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 /**
- * Created by Administrator on 2016/1/21.
+ * Created by leon on 2016/1/21.
  */
 public class MyClient1 {
     public static void main(String[] args){
@@ -23,7 +23,7 @@ public class MyClient1 {
         }
 
         try {
-            in = new DataInputStream(socket.getInputStream());
+            in = new DataInputStream(socket.getInputStream());  // may produce NullPointerException
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,10 +33,18 @@ public class MyClient1 {
             e.printStackTrace();
         }
         try {
-            out.writeDouble(8.9);
+            out.writeDouble(8.9);  // may produce NullPointerException
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("end");
         /*try {
             System.out.println(in.readDouble());
         } catch (IOException e) {

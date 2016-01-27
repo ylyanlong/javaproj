@@ -3,7 +3,7 @@ package com.yl.dp;
 import java.util.*;
 
 /**
- *  ²Î¿¼Á´½Ó:
+ *  å‚è€ƒé“¾æ¥:
  * @author Administrator
  *
  */
@@ -40,7 +40,7 @@ interface IWeatherListener extends EventListener{
 
 class reactOfMother2Weather implements IWeatherListener{
 	public void goingToDo(WeatherEvent event){
-		System.out.println(event.getWeatherEvent() + "  ÊÕ±»×ÓÀ²");
+		System.out.println(event.getWeatherEvent() + "  æ”¶è¢«å­å•¦");
 	}
 }
 
@@ -49,7 +49,7 @@ class reactOfGirl2Weather implements IWeatherListener{
 	@Override
 	public void goingToDo(WeatherEvent event) {
 		// TODO Auto-generated method stub
-		System.out.println(event.getWeatherEvent() + "  ÄÃ³öĞ¡»¨É¡À²À²");
+		System.out.println(event.getWeatherEvent() + "  æ‹¿å‡ºå°èŠ±ä¼å•¦å•¦");
 		
 	}
 	
@@ -71,7 +71,7 @@ class WeatherForcast{
 	}
 	
 	private void notifies(){
-		WeatherEvent weatherEvent = new WeatherEvent(this, "½«ÒªÏÂÓê");
+		WeatherEvent weatherEvent = new WeatherEvent(this, "å°†è¦ä¸‹é›¨");
 		Iterator<EventListener> iterator = mListenerSet.iterator();
 		while(iterator.hasNext() ){
 			IWeatherListener iweatherListener = (IWeatherListener)iterator.next();

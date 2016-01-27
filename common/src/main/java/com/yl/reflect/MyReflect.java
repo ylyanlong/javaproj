@@ -25,7 +25,7 @@ public class MyReflect {
 		
 		constructorObject("cn.com.yl.reflect.Person");
 		
-		showDeclaredMethods("cn.com.yl.reflect.Student");  // ²¢Î´³öÏÖ Object Ïà¹ØµÄº¯Êı, Object ÆäÊµÊÇ¶ş¼¶¸¸Àà, ¿ÉÒÔ²âÊÔÏÂ
+		showDeclaredMethods("cn.com.yl.reflect.Student");  // å¹¶æœªå‡ºç° Object ç›¸å…³çš„å‡½æ•°, Object å…¶å®æ˜¯äºŒçº§çˆ¶ç±», å¯ä»¥æµ‹è¯•ä¸‹
 		showDeclaredMethods("cn.com.yl.reflect.Person");
 
 		showDeclaredFields("cn.com.yl.reflect.Student");
@@ -38,7 +38,7 @@ public class MyReflect {
 		try {
 			Class<?> classObject = Class.forName(classPath);
 			Constructor<?> constructObj = classObject.getConstructor(String.class);
-			// constructObj.setAccessible(true);  // Îª true Ê±È¡Ïû java ÓïÑÔ¼ì²é, ÌáÉı·´ÉäµÄËÙ¶È
+			// constructObj.setAccessible(true);  // ä¸º true æ—¶å–æ¶ˆ java è¯­è¨€æ£€æŸ¥, æå‡åå°„çš„é€Ÿåº¦
 			Object object = constructObj.newInstance("simple.test");
 			System.out.println("obj:  " + object.toString() );
 		} catch (ClassNotFoundException e) {
@@ -74,7 +74,7 @@ public class MyReflect {
 			}
 
 			Method learnMetnod = classObj.getDeclaredMethod("learn", String.class);
-			Class<?>[] paramClass = learnMetnod.getParameterTypes();  // class ¾¿¾¹ÊÇÊ²Ã´,¸Ğ¾õºÍ·ºĞÍÓĞºÜ´ó¹ØÏµ
+			Class<?>[] paramClass = learnMetnod.getParameterTypes();  // class ç©¶ç«Ÿæ˜¯ä»€ä¹ˆ,æ„Ÿè§‰å’Œæ³›å‹æœ‰å¾ˆå¤§å…³ç³»
 			for(Class<?> classEle: paramClass){
 				System.out.println("paramType: " + classEle.getName() );
 			}
@@ -142,13 +142,13 @@ public class MyReflect {
 	private static void showDeclaredFields(String classPath){
 		try {
 			Class<?> classObj = Class.forName(classPath);
-			Field[] fields = classObj.getDeclaredFields();  // »ñÈ¡µ½ÁËËùÓĞ×Ö¶Î,°üÀ¨Ë½ÓĞµÄ
+			Field[] fields = classObj.getDeclaredFields();  // è·å–åˆ°äº†æ‰€æœ‰å­—æ®µ,åŒ…æ‹¬ç§æœ‰çš„
 			for(Field fieldEle: fields){
 				System.out.println("fieldName: " + fieldEle.getName() );
 			}
 
 			Student student = new Student("Lily");
-			Field mGradeField = classObj.getDeclaredField("id");  // Ö»ÄÜ»ñÈ¡¹²ÓĞ×Ö¶Î
+			Field mGradeField = classObj.getDeclaredField("id");  // åªèƒ½è·å–å…±æœ‰å­—æ®µ
 			System.out.println("mGrade: " + mGradeField.getInt(student) );
 			mGradeField.setInt(student, 20);
 			System.out.println("mGrade: " + mGradeField.getInt(student) );

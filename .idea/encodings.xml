@@ -1,48 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/atomic/MyAtomicLong.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/builtIn/MyByteT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/builtIn/MyConsole1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/builtIn/MyFinal.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/builtIn/MyFinalT2.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/builtIn/MyFinalT3.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/builtIn/MyRange.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/classprac/Circle3.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/classprac/SingletonT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/classprac/SingletonT2.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/datetime/DateT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/datetime/DateT2.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/dp/Observer.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/generic/GenericT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/list/ArrayAndLinkedListT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/list/ArrayListT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/map/MyMapT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/map/MyMapT2.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/map/MyMapT3.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/myenum/MyEnum.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/reflect/Breathe.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/reflect/Examination.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/reflect/MyReflect.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/reflect/Person.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/reflect/Student.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/HashSetT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/HashSetT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/HashSetT2.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/HashSetT2.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/HashSetT3.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/LinkedHashSetT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/LinkedHashSetT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/TreeSetT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/TreeSetT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/string/MyStringBuilder.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/string/MyStringPrac1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/string/MyStringPrac2.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/thread/MyThreadT1.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/thread/MyUUIDTest.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/timer/MyTimerT1.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/atomic/MyAtomicLong.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/builtIn/MyByteT1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/builtIn/MyConsole1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/builtIn/MyFinal.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/builtIn/MyFinalT2.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/builtIn/MyFinalT3.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/builtIn/MyRange.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/classprac/Circle3.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/classprac/SingletonT1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/classprac/SingletonT2.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/datetime/DateT1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/datetime/DateT2.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/dp/Observer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/generic/GenericT1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/list/ArrayAndLinkedListT1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/list/ArrayListT1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/map/MyMapT1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/map/MyMapT2.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/map/MyMapT3.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/myenum/MyEnum.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/reflect/Breathe.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/reflect/Examination.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/reflect/MyReflect.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/reflect/Person.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/reflect/Student.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/HashSetT1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/HashSetT2.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/HashSetT3.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/LinkedHashSetT1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/set/TreeSetT1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/string/MyStringBuilder.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/string/MyStringPrac1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/string/MyStringPrac2.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/thread/MyThreadT1.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/thread/MyUUIDTest.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/yl/timer/MyTimerT1.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jsonprac" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mydb" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mydb/src/main/resources/databases_test.properties" charset="GBK" />
@@ -54,5 +50,6 @@
     <file url="file://$PROJECT_DIR$/mylog1/src/main/resources/logback.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/mylog1/src/test/resources/logback-test.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/socket" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

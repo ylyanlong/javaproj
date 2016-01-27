@@ -6,7 +6,7 @@ class GenericStack<E>{
 	private ArrayList<E> list = new ArrayList<E>();
 	
 	public int getSize(){
-		return list.size();  // java ¶ÔÈİÆ÷´óĞ¡ÊÇÍ³Ò»ÓÃ size Âğ?
+		return list.size();  // java å¯¹å®¹å™¨å¤§å°æ˜¯ç»Ÿä¸€ç”¨ size å—?
 	}
 	public E peek(){
 		return list.get(getSize() - 1);
@@ -61,7 +61,7 @@ public class GenericT1 {
 		double maxValue = max(genericStInt);
 		System.out.println("maxValue: " + maxValue);
 		
-		// ºÏ²¢stack
+		// åˆå¹¶stack
 		GenericStack<String> stackStr = new GenericStack<String>();
 		stackStr.push("abc");
 		stackStr.push("jkl");
@@ -81,7 +81,7 @@ public class GenericT1 {
 			System.out.print(list[i] + "  ");
 		System.out.println();
 	}
-	public static double max(GenericStack<? extends Number> stack){  // ·µ»ØÖµÇ°ÃæÃ»ÓĞÀàĞÍĞÅÏ¢£¬ÊÇÒòÎªÀàĞÍĞÅÏ¢ÊÇÒÑÖªµÄÂğ£¿
+	public static double max(GenericStack<? extends Number> stack){  // è¿”å›å€¼å‰é¢æ²¡æœ‰ç±»å‹ä¿¡æ¯ï¼Œæ˜¯å› ä¸ºç±»å‹ä¿¡æ¯æ˜¯å·²çŸ¥çš„å—ï¼Ÿ
 		double max = stack.pop().doubleValue();
 		while(!stack.isEmpty() ){
 			double value = stack.pop().doubleValue();

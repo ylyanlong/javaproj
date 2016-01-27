@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 婵炴垶鎹囩紓姘辨崲閺嶃劎鈻旈柣姘辨珮pper闂佸湱顭堝ú銈夋偩閻愵剛鈻旈柨鐔诲Г缁嬪顢旈崟顒佹婵炴垶鎼幏鐑芥煟閵娿儱鐓恆mespace闂佹寧绋戦鍝竚espace闂佹眹鍔岀�氼剟鏁撴禒瀣紵缂佲�冲楠炲棝顢涘▎鎴犳啰闁荤姳绀佹晶浠嬫偪閸℃稑绠ｉ柟閭﹀墮閻﹀爼鏌涘鐐+sql闂佸搫瀚慨鎾儍閻樿妫橀柛銉檮椤愪粙鏌涘顒傗枌缂佽鲸绻冨璇测枎閹邦喖顥庨柣蹇撶箺缁箖宕楀Ο璇茬窞闁绘柨澧庣粻浠嬫偣閸ワ箒瀚檃mespace闂佹眹鍔岀�氼剟鏁撻挊澶婃倯婵″弶鎮傚畷顒勵敍濞嗘埈浼囬梺娲荤厜閹凤拷
+婵炴挻鑹鹃鍛淬�呴—纰糾espace="me.gacl.mapping.userMapper"闁诲繐绻楁ご绋课ｇ粩姝�.gacl.mapping(闂佸憡鐗曢幊搴ㄥ箖閿燂拷)+userMapper(userMapper.xml闂佸搫鍊稿ú锝呪枎閵忋倕鍌ㄥ┑鐘崇閻濈喖鏌涘顒佹崳缂佹唻鎷�)
+ -->
+<mapper namespace="com.yl.mappers.statact.StatKeyMapper">
+    <!-- 闂侀潻鑵归弳鐎峫ect闂佸搫绉村ú銊╊敆闁垮鈻旀い鎾跺Х濡炰粙鏌涢幇顓犳噭闁绘搫绱曢幏鐘诲閵忥紕鏆燬QL闁荤姴娴傞崢鑹般亹閻愮儤鏅柨鐕傛嫹 闁荤姳绀佹晶浠嬫偪閸炴潉lect闂佸搫绉村ú銊╊敆閻戣姤鍎嶉柛鎺旀儎闁诲繒鍋熼崑鐐烘晸缁愭牕鍊界粈濯慹tUser闂佹寧绋戦绺熼柣蹇曞仧閸嬬偤鏁撶粣鏍у枦閹风兘鎮℃惔锝囩暠婵＄偑鍊楃划顖毼ｉ幖浣歌埞妞ゆ牗鐟ч閬嶆煟閵娿儱顏电紒杈ㄧ箖缁嬪顓奸崼婵嗗箣婵犮垹澧庨崰鏍闯閸涘﹤绶為柨鐕傛嫹
+    婵炶揪缍�濞夋洟寮ˇ鏈紃ameterType闁诲繒鍋熼崑鐐烘晸缁愭牕瀚惁褰掓煛閸曨偄顒㈤柣鎿勭磿閹风娀濮�閳╁喚妲繛杈剧秬濞夋洟寮妶澶嬪剭闁告洦鍋勫Λ姗�鏌℃担鐟邦棆閻炴凹鍋婂畷鍦拷锝呭缁�濉篹sultType闁诲繒鍋熼崑鐐烘晸缁愭牕瀚惁褰掓煛閸曨偄顒㈤柣鎿勭磿閹风娀濮�閿濆洨顔夐梺鎼炲劤閸嬬喎鈻撻幋鐘电＜闁规儳顕禍顖炴⒒閸℃顥犻悶姘煎亰瀹曞綊鏁撻敓锟�
+    resultType="me.gacl.domain.User"闁诲繐绻楃划楣冨Υ閸愵亞鐭嗛柛婵嗗濞堟椽鏌＄仦璇插姤妞ゆ洘顨堢槐鎺楀箻鐎甸晲鍑介柣蹇撶箣濞村洭藟婵犲洤绠ｉ柟閭︿簽椤忓崬鈽夐幘璺虹樂ser缂備緡鍋夊畷闈涒枔閹寸媴鎷烽悽娈挎敯闁芥牕瀚濠氬棘閹稿海顦�
+    User缂備緡鍋夐褍顫濋妸鈺佸強闁汇儳顭篹rs闁荤偞绋忛崝宥嗘櫠瀹ュ浄鎷烽悽鍨殌缂併劍鐓￠幆鍐礋椤愩倖婢栨繛杈剧稻閹稿墽鎮敓锟�
+    -->
+    <!--
+        闂佸搫绉烽～澶婄暤娑旂敠闂佸搫琚崕鎾敋濡わ拷椤曘儱螖閿熶粙宕虹仦鍓р枖闁跨喕濮ょ粙澶愭偖缁茬尃r闁诲海鏁搁、濠囨寘閿燂拷
+     -->
+    <!--<insert id="updateStatKey1d" >-->
+        <!--INSERT INTO stat_key_1d (dataTime, key_name, value) VALUES (#{datatime}, #{keyName}, #{value}) ON DUPLICATE KEY UPDATE value=VALUES(value)-->
+    <!--</insert>-->
+
+    <insert id="batchInsertStatKey1d" parameterType="java.util.List" >
+        INSERT INTO stat_key_1d (dataTime, key_name, value) VALUES
+        <foreach collection="list" item="ele" index="index" separator=",">
+            (#{ele.datatime}, #{ele.keyName}, #{ele.value})
+        </foreach>
+        ON DUPLICATE KEY UPDATE value=VALUES(value)
+    </insert>
+</mapper>

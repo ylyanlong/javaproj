@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--<properties resource="databases.properties"/>-->
+    <properties resource="databases_test.properties"/>
+    <!-- 鍜宻pring鏁村悎鍚� environments閰嶇疆灏嗗簾闄�-->
+    <environments default="development">
+        <environment id="development">
+            <!-- 浣跨敤jdbc浜嬪姟绠＄悊,浜嬪姟鎺у埗鐢眒ybatis绠＄悊-->
+            <transactionManager type="JDBC" />
+            <!-- 鏁版嵁搴撹繛鎺ユ睜,鐢眒ybatis绠＄悊-->
+            <dataSource type="POOLED">
+                <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>-->
+                <property name="driver" value="com.mysql.jdbc.Driver"></property>
+                <property name="url" value="jdbc:mysql://${statis_act.jdbc.host}:${statis_act.jdbc.port}/${statis_act.jdbc.dbname}?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true"></property>
+                <property name="username" value="${statis_act.jdbc.username}"></property>
+                <property name="password" value="${statis_act.jdbc.password}"></property>
+                <property name="poolPingEnabled" value="true"/>
+                <property name="poolPingQuery" value="select 1"/>
+
+                <!--<property name="maxActive" value="100"></property>-->
+                <!--<property name="maxIdle" value="100"></property>-->
+                <!--<property name="maxWait" value="5000"></property>-->
+                <!--<property name="defaultAutoCommit" value="true"></property>-->
+                <!--<property name="validationQuery" value="select 1"></property>-->
+                <!--<property name="testOnBorrow" value="true"></property>-->
+                <!--<property name="testWhileIdle" value="true"></property>-->
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 鍔犺浇鏄犲皠鏂囦欢 -->
+    <mappers>
+        <mapper resource="mappers/statactMapper.xml"/>
+    </mappers>
+</configuration>

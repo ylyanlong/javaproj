@@ -16,5 +16,6 @@ public class MyFinalT2 {
         circleObj1.setRadius(5.2);
         System.out.println("circleObj1 's radius: " + circleObj1.getRadius());
         System.out.println("adress:" + myFinalT2 );
+        System.out.println("test proj");
     }
 }

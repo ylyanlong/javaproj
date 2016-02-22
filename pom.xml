@@ -15,6 +15,7 @@
         <module>common</module>
         <module>jsonprac</module>
         <module>socket</module>
+        <module>thread</module>
     </modules>
 
     <properties>

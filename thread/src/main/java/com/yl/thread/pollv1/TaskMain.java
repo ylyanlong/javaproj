@@ -1,10 +1,7 @@
-package com.yl.thread;
+package com.yl.thread.pollv1;
 
-import com.sun.scenario.effect.impl.prism.PrImage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by Administrator on 2016/2/20.

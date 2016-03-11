@@ -33,5 +33,6 @@
     <!-- 鍔犺浇鏄犲皠鏂囦欢 -->
     <mappers>
         <mapper resource="mappers/statactMapper.xml"/>
+        <mapper class="com.yl.dbtest.dao.UserMapper"/>
     </mappers>
 </configuration>

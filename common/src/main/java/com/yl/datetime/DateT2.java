@@ -1,6 +1,7 @@
 package com.yl.datetime;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,5 +18,13 @@ public class DateT2 {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateStr = dateFormat.format(mydate);
         System.out.println(dateStr);
+
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date tmpDate = dateFormat2.parse("2016-03-01 00:00:03");
+            System.out.println("time: " + tmpDate.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

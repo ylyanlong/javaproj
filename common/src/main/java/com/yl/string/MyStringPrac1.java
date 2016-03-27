@@ -37,6 +37,11 @@ public class MyStringPrac1 {
 			System.out.println("comp1 != comp2");
 		}
 
+		Object object_comp1 = comp1;
+		Object object_comp2 = comp2;
+		System.out.println("comp1 adress:" + object_comp1);  // 无用，目测 toString() 方法以及被覆盖了
+		System.out.println("comp2 adress:" + object_comp2);
+
 		if(COMP3 == comp1){
 			System.out.println("COMP3 == comp1");
 		} else {

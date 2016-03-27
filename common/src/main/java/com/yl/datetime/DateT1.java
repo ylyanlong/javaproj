@@ -54,6 +54,7 @@ public class DateT1 {
             System.out.println("dateFromStr2: " + dateFromStr2);
             System.out.println("dateFromStr3: " + dateFromStr3.getTime());
 
+
             // System.out.println("dateFormatNum: " + dateFormatNum.format(dateFromStr3) );
             String dateTimeNum = dateFormatNum.format(dateFromStr3);
             String dateNum = dateTimeNum.substring(0, 8);
@@ -86,6 +87,7 @@ public class DateT1 {
         // cal.add(Calendar.MINUTE, -20);
         System.out.println("hour: " + cal.get(Calendar.HOUR_OF_DAY) ) ;
         System.out.println("min: " + cal.get(Calendar.MINUTE));
+        System.out.println("second:" + cal.get(Calendar.SECOND));
         Date date5 = cal.getTime();
         System.out.println("time5: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date5));
 

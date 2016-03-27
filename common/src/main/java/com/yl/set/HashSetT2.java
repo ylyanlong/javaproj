@@ -13,6 +13,7 @@ public class HashSetT2 {
         set1.add("New York");
         set1.add("San Francisco");
         set1.add("Beijing");
+        System.out.printf(set1.toString());
         System.out.println("set1 is " + set1);
         System.out.println(set1.size() + " elements in set1");
 

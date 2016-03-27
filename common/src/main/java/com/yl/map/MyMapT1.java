@@ -45,6 +45,7 @@ public class MyMapT1 {
         linkedHashMap.put("Anderson", 31);
         linkedHashMap.put("Lewis", 29);
         linkedHashMap.put("Cook", 29);
+        System.out.println("null key:" + linkedHashMap.get("yl"));
         System.out.println("Lew 's age: " + linkedHashMap.get("Lewis").intValue());
         System.out.println("linkedHashMap:" + linkedHashMap);
 

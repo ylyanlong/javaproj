@@ -3,6 +3,7 @@ package com.yl.datetime;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -26,5 +27,17 @@ public class DateT2 {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+
+        Calendar cal = Calendar.getInstance();
+        System.out.println("second:" + cal.get(Calendar.SECOND));
+        try {
+            Thread.sleep(1000 * 10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("second2:" + cal.get(Calendar.SECOND));
+
     }
 }

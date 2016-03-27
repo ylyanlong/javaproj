@@ -27,11 +27,11 @@
     </appender>
 
     <logger name="com.yl" additivity="false">
-        <level value="info" />
+        <level value="Warn" />
         <appender-ref ref="STDOUT" />
     </logger>
 
-    <root>
+    <root level="Debug">
         <appender-ref ref="STDOUT" />
         <!--<appender-ref ref="file" />-->
     </root>

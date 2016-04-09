@@ -32,5 +32,15 @@ public class DatetimeT1 {
         String orderid = "201601210000000002RTTZMSZ";
         // Date orderidDate = DateUtils.parseDate(orderid.substring(0, 14));
 
+        long srvstamp = 1459305706 * 1000L;
+        // Date date23 = new Date(1459305706000L);
+        Date date23 = new Date(srvstamp);
+        System.out.println("date23" + date23);
+        Date dateNow = new Date();
+        System.out.println("dateNow:" + dateNow.getTime());
+        String srvTimeStr = DateFormatUtils.format(srvstamp, "yyyyMMddHHmm00");
+        System.out.println("srvTimeStr:" + srvTimeStr);
+
+
     }
 }

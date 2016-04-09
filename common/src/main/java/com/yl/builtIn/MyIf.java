@@ -11,5 +11,7 @@ public class MyIf {
         } else {
             System.out.println("a >= 15");
         }
+
+        System.out.println(Integer.parseInt(null));
     }
 }

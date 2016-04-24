@@ -26,6 +26,14 @@ public class ListT3 {
             System.out.println("ele:" + user.toString() );
         }
 
+        // List<Long> list2 = null;
+        List<Long> list2 = new ArrayList<>();
+        System.out.println("list2 size:" + list2.size());
+        for(Long ele: list2){
+            System.out.printf("list2 ele: " + ele);
+        }
+        System.out.println("list2 end");
+
     }
 
 }

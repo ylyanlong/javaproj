@@ -23,4 +23,8 @@
         </foreach>
         ON DUPLICATE KEY UPDATE value=VALUES(value)
     </insert>
+
+    <select id="getAgeById" resultType="Integer">
+        select age from users where id=#{id}
+    </select>
 </mapper>

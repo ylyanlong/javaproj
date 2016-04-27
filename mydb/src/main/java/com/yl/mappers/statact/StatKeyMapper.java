@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface StatKeyMapper {
     public void batchInsertStatKey1d(List<StatKey1dInfo> dataList);  //传参
+
+    Integer getAgeById(int id);
 }

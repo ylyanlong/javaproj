@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class MyDBTest {
     public static void main(String[] args){
-        List<StatKey1dInfo> keyInfo = new LinkedList<>();
+        /*List<StatKey1dInfo> keyInfo = new LinkedList<>();
         keyInfo.add(new StatKey1dInfo("2015-12-09 12:01:00", "KEY_DB_TEST", 1) );
         keyInfo.add(new StatKey1dInfo("2015-12-09 12:02:00", "KEY_DB_TEST", 2) );
 
@@ -19,10 +19,22 @@ public class MyDBTest {
         keyInfo.add(new StatKey1dInfo("2015-12-09 12:04:00", "KEY_DB_TEST", 4) );
         keyInfo.add(new StatKey1dInfo("2015-12-09 12:05:00", "KEY_DB_TEST", 5) );
         keyInfo.add(new StatKey1dInfo("2015-12-09 12:06:00", "KEY_DB_TEST", 6) );
-        keyInfo.add(new StatKey1dInfo("2015-12-09 12:07:00", "KEY_DB_TEST", 7) );
+        keyInfo.add(new StatKey1dInfo("2015-12-09 12:07:00", "KEY_DB_TEST", 7) );*/
 
 
         StatKeyDao statKeyDao = new StatKeyDao();
-        statKeyDao.dbBatchUpdateStat1dkey(keyInfo);
+        // Integer age = statKeyDao.dbGetUserAge(9981);
+        for(int i = 0; i < 50; ++i){
+            Integer age = statKeyDao.dbGetUserAge(9981);
+            System.out.println("age: " + age);
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // statKeyDao.dbBatchUpdateStat1dkey(keyInfo);
     }
 }

@@ -19,6 +19,28 @@ import java.util.List;
 public class StatKeyDao {
     private static final Logger LOG = LoggerFactory.getLogger(StatKeyDao.class);
 
+    static SqlSession sqlSession_test = SqlSessionFactoryConfig.getSqlSessionFactory_statact().openSession();
+
+    public Integer dbGetUserAge(int id){
+        SqlSession sqlSession = null;
+
+        Integer age = null;
+        try {
+            // sqlSession = SqlSessionFactoryConfig.getSqlSessionFactory_statact().openSession();
+            // StatKeyMapper statKeyMapper = sqlSession.getMapper(StatKeyMapper.class);
+            sqlSession_test = SqlSessionFactoryConfig.getSqlSessionFactory_statact().openSession();
+            StatKeyMapper statKeyMapper = sqlSession_test.getMapper(StatKeyMapper.class);
+            age = statKeyMapper.getAgeById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // sqlSession.close();
+            sqlSession_test.close();
+        }
+
+        return age;
+    }
+
     public void dbBatchUpdateStat1dkeyTest(List<StatKey1dInfo> dataList){
         SqlSession sqlSession = null;
 

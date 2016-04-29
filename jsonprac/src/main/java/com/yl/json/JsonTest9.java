@@ -12,9 +12,11 @@ public class JsonTest9 {
     private static ObjectMapper objectMapper = null;
 
     public static void main(String[] args){
-        AnchorExitInfo anchorExitInfo = new AnchorExitInfo(58964, 0.5987, 565);
+        AnchorExitInfo anchorExitInfo = new AnchorExitInfo(58964, 0.5987, 565, 56, 50);
 
+        // {"uid":58964,"en_uv":85,"out_uv":54,"liushiRate":0.5987,"rank":565}
         String rtn = null;
+        // String rtn = "{\"uid\":58964,\"en_uv\":85,\"out_uv\":54,\"liushiRate\":0.5987,\"rank\":565}";
 
         objectMapper = new ObjectMapper();
 

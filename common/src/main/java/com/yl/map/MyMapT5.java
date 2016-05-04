@@ -18,5 +18,8 @@ public class MyMapT5 {
         for(Map.Entry<String, String> ele: entries){
             System.out.println( ele.getKey() + " : " + ele.getValue());
         }
+
+        Map<Integer, Integer> map = new HashMap();
+        System.out.println("map isEmpty:" + map.isEmpty());
     }
 }

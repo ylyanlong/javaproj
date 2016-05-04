@@ -18,6 +18,7 @@
         <module>thread</module>
         <module>myspring1</module>
         <module>myweb1</module>
+        <module>springaop</module>
     </modules>
 
     <properties>

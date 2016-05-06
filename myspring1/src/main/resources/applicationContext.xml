@@ -14,4 +14,57 @@
               <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>-->
        </context:component-scan>
 
+       <bean id="helloWorld" class="com.yl.spring.beans.HelloWorld">
+              <property name="message" value="Hello World"/>
+       </bean>
+
+
+
+       <bean id="java" class="com.yl.spring.beans.JavaLanguage" />
+
+       <bean id="cpp" class="com.yl.spring.beans.CppLanguage" />
+
+       <!--1.通过构造函数注入 （原始方式)；此时是根据位置顺序来定位的，会将相应的字符串转为对应的参数类型，转换失败，就会报错-->
+       <bean id="leader1" class="com.yl.spring.beans.LeaderA">
+              <constructor-arg value="tom"/>
+              <constructor-arg value="20"/>
+              <constructor-arg value="600" />
+              <constructor-arg value="男"/>
+              <constructor-arg value="12"/>
+              <constructor-arg ref="cpp"/>
+              <constructor-arg ref="java" />
+       </bean>
+
+       <!--2.根据构造器参数的类型，同类型的，需要和参数列表里面的参数顺序一致  -->
+       <bean id="leader2" class="com.yl.spring.beans.LeaderA">
+              <constructor-arg type="java.lang.String" value="男" />
+              <constructor-arg type="java.lang.String" value="李四" />
+              <constructor-arg type="int" value="20" />
+              <constructor-arg type="java.lang.Double" value="3000.5"/>
+              <constructor-arg type="int" value="8"/>
+              <constructor-arg type="com.yl.spring.beans.ILanguage" ref="cpp"/>
+              <constructor-arg type="com.yl.spring.beans.ILanguage" ref="java"/>
+       </bean>
+
+       <!--根据索引index注入-->
+       <bean id="leader3" class="com.yl.spring.beans.LeaderA">
+              <constructor-arg index="0" value="王五"/>
+              <constructor-arg index="1" value="30"/>
+              <constructor-arg index="2" value="4000.6"/>
+              <constructor-arg index="3" value="男"/>
+              <constructor-arg index="4" value="15"/>
+              <constructor-arg index="5" ref="cpp"/>
+              <constructor-arg index="6" ref="java"/>
+       </bean>
+
+       <!--根据参数名称注入-->
+       <bean id="leader4" class="com.yl.spring.beans.LeaderA">
+              <constructor-arg name="name" value="赵六"/>
+              <constructor-arg name="id" value="32"/>
+              <constructor-arg name="salary" value="5000.5"/>
+              <constructor-arg name="sex" value="男"/>
+              <constructor-arg name="teamNum" value="30"/>
+              <constructor-arg name="language1" ref="cpp"/>
+              <constructor-arg name="language2" ref="java"/>
+       </bean>
 </beans>

@@ -75,8 +75,8 @@ public class GenericT1 {
 		printGenericStack(stackObj);
 	}
 
-
 	public static <E> void print(E[] list){
+	// public static  void print(E[] list){
 		for(int i = 0; i < list.length; ++i)
 			System.out.print(list[i] + "  ");
 		System.out.println();

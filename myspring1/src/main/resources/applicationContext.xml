@@ -8,63 +8,159 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-       <!-- 自动扫描quick4j包 ,将带有注解的类 纳入spring容器管理 -->
-       <context:component-scan base-package="com.yl.spring">
-              <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-              <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>-->
-       </context:component-scan>
+    <!--&lt;!&ndash; 自动扫描quick4j包 ,将带有注解的类 纳入spring容器管理 &ndash;&gt;
+    <context:component-scan base-package="com.yl.spring">
+           &lt;!&ndash;<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+           <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>&ndash;&gt;
+    </context:component-scan>-->
 
-       <bean id="helloWorld" class="com.yl.spring.beans.HelloWorld">
-              <property name="message" value="Hello World"/>
-       </bean>
+    <bean id="helloWorld" class="com.yl.spring.beans.HelloWorld">
+        <property name="message" value="Hello World"/>
+    </bean>
 
 
+    <bean id="java" class="com.yl.spring.beans.JavaLanguage"/>
 
-       <bean id="java" class="com.yl.spring.beans.JavaLanguage" />
+    <bean id="cpp" class="com.yl.spring.beans.CppLanguage"/>
 
-       <bean id="cpp" class="com.yl.spring.beans.CppLanguage" />
+    <!--1.通过构造函数注入 （原始方式)；此时是根据位置顺序来定位的，会将相应的字符串转为对应的参数类型，转换失败，就会报错-->
+    <bean id="leader1" class="com.yl.spring.beans.LeaderA">
+        <constructor-arg value="tom"/>
+        <constructor-arg value="20"/>
+        <constructor-arg value="600"/>
+        <constructor-arg value="男"/>
+        <constructor-arg value="12"/>
+        <constructor-arg ref="cpp"/>
+        <constructor-arg ref="java"/>
+    </bean>
 
-       <!--1.通过构造函数注入 （原始方式)；此时是根据位置顺序来定位的，会将相应的字符串转为对应的参数类型，转换失败，就会报错-->
-       <bean id="leader1" class="com.yl.spring.beans.LeaderA">
-              <constructor-arg value="tom"/>
-              <constructor-arg value="20"/>
-              <constructor-arg value="600" />
-              <constructor-arg value="男"/>
-              <constructor-arg value="12"/>
-              <constructor-arg ref="cpp"/>
-              <constructor-arg ref="java" />
-       </bean>
+    <!--2.根据构造器参数的类型，同类型的，需要和参数列表里面的参数顺序一致  -->
+    <bean id="leader2" class="com.yl.spring.beans.LeaderA">
+        <constructor-arg type="java.lang.String" value="男"/>
+        <constructor-arg type="java.lang.String" value="李四"/>
+        <constructor-arg type="int" value="20"/>
+        <constructor-arg type="java.lang.Double" value="3000.5"/>
+        <constructor-arg type="int" value="8"/>
+        <constructor-arg type="com.yl.spring.beans.ILanguage" ref="cpp"/>
+        <constructor-arg type="com.yl.spring.beans.ILanguage" ref="java"/>
+    </bean>
 
-       <!--2.根据构造器参数的类型，同类型的，需要和参数列表里面的参数顺序一致  -->
-       <bean id="leader2" class="com.yl.spring.beans.LeaderA">
-              <constructor-arg type="java.lang.String" value="男" />
-              <constructor-arg type="java.lang.String" value="李四" />
-              <constructor-arg type="int" value="20" />
-              <constructor-arg type="java.lang.Double" value="3000.5"/>
-              <constructor-arg type="int" value="8"/>
-              <constructor-arg type="com.yl.spring.beans.ILanguage" ref="cpp"/>
-              <constructor-arg type="com.yl.spring.beans.ILanguage" ref="java"/>
-       </bean>
+    <!--根据索引index注入-->
+    <bean id="leader3" class="com.yl.spring.beans.LeaderA">
+        <constructor-arg index="0" value="王五"/>
+        <constructor-arg index="1" value="30"/>
+        <constructor-arg index="2" value="4000.6"/>
+        <constructor-arg index="3" value="男"/>
+        <constructor-arg index="4" value="15"/>
+        <constructor-arg index="5" ref="cpp"/>
+        <constructor-arg index="6" ref="java"/>
+    </bean>
 
-       <!--根据索引index注入-->
-       <bean id="leader3" class="com.yl.spring.beans.LeaderA">
-              <constructor-arg index="0" value="王五"/>
-              <constructor-arg index="1" value="30"/>
-              <constructor-arg index="2" value="4000.6"/>
-              <constructor-arg index="3" value="男"/>
-              <constructor-arg index="4" value="15"/>
-              <constructor-arg index="5" ref="cpp"/>
-              <constructor-arg index="6" ref="java"/>
-       </bean>
+    <!--根据参数名称注入-->
+    <bean id="leader4" class="com.yl.spring.beans.LeaderA">
+        <constructor-arg name="name" value="赵六"/>
+        <constructor-arg name="id" value="32"/>
+        <constructor-arg name="salary" value="5000.5"/>
+        <constructor-arg name="sex" value="男"/>
+        <constructor-arg name="teamNum" value="30"/>
+        <constructor-arg name="language1" ref="cpp"/>
+        <constructor-arg name="language2" ref="java"/>
+    </bean>
 
-       <!--根据参数名称注入-->
-       <bean id="leader4" class="com.yl.spring.beans.LeaderA">
-              <constructor-arg name="name" value="赵六"/>
-              <constructor-arg name="id" value="32"/>
-              <constructor-arg name="salary" value="5000.5"/>
-              <constructor-arg name="sex" value="男"/>
-              <constructor-arg name="teamNum" value="30"/>
-              <constructor-arg name="language1" ref="cpp"/>
-              <constructor-arg name="language2" ref="java"/>
-       </bean>
+    <!--通过静态方法创建对象-->
+    <bean id="stage" class="com.yl.spring.beans.Stage" factory-method="getInstance"/>
+
+    <bean id="beanScope" class="com.yl.spring.beans.BeanScope" scope="prototype" />
+
+    <bean id="initDestroyBean" class="com.yl.spring.beans.InitDestroyBean" init-method="init" destroy-method="destroy" />
+
+    <!--setter 注入-->
+    <!--1, 没有默认构造函数时会报错-->
+    <bean id="beanSetterInject" class="com.yl.spring.beans.BeanSetterInject">
+        <property name="age" value="25" />
+        <property name="name" value="tom" />
+        <property name="height" value="170.5" />
+        <property name="sex" value="true" />
+        <!--<property name="iLanguage" ref="java" />-->
+        <!--内部Bean方式，不会公用;构造器方式也可以使用该方法-->
+        <property name="iLanguage">
+            <bean class="com.yl.spring.beans.JavaLanguage" />
+        </property>
+    </bean>
+
+    <!--集合注入-->
+    <bean id="beanCollectionInject" class="com.yl.spring.beans.BeanCollectionInject">
+        <property name="languages">
+            <!--数组 或者 Collection 的实现都可以用 list 或者 set 注入-->
+            <!--list 注入-->
+            <!--<list>
+                <ref bean="cpp" />
+                <ref bean="java" />
+            </list>-->
+
+            <!--set 注入-->
+            <set>
+                <ref bean="java"/>
+                <ref bean="cpp" />
+            </set>
+        </property>
+    </bean>
+
+    <!--map 注入-->
+    <bean id="beanMapInject" class="com.yl.spring.beans.BeanMapInject">
+        <property name="name2language">
+            <map>
+                <entry key="java" value-ref="cpp" />
+                <entry key="cpp" value-ref="java" />
+            </map>
+        </property>
+    </bean>
+
+    <!--数字型的也是可以的，说明可以是普通类型的-->
+    <bean id="beanMapIntergeInject" class="com.yl.spring.beans.BeanMapIntergeInject">
+        <property name="id2language">
+            <map>
+                <entry key="1" value-ref="java" />
+                <entry key="2" value-ref="cpp" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="beanPropInject" class="com.yl.spring.beans.BeanPropInject">
+        <property name="properties">
+            <props>
+                <prop key="tom">math</prop>
+                <prop key="lilei">history</prop>
+                <prop key="john">chinese</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--null 注入-->
+    <bean id="beanNullInject" class="com.yl.spring.beans.BeanNullInject">
+        <property name="age"><null/></property>
+        <property name="books"><null/></property>
+    </bean>
+
+    <!--SpEL相关-->
+    <bean id="spELLiteral" class="com.yl.spring.beans.SpELLiteral">
+        <property name="age" value="#{25}" />
+        <property name="name" value="#{'tom'}" />
+        <property name="height" value="#{175.8}" />
+        <property name="address" value="ZHONG SHAN ROAD, NUM #{309}" />
+    </bean>
+
+    <!--可以调用另外一个Bean id来给自己的Bean 引用赋值: #{beanid} 不需要引号，直接用就行了
+    可以调用另外一个Bean 的属性或者方法:#{beanid.property}, #{beanid.method()}-->
+    <bean id="spELReference" class="com.yl.spring.beans.SpELReference">
+        <!--引用Bean、proterty、方法-->
+        <property name="age" value="#{spELLiteral.getAge()}" />
+        <property name="name" value="#{spELLiteral.name}" />
+        <property name="address" value="#{spELLiteral.getAddress()?.toUpperCase()}" />
+        <!--操作类, 通过"T(CLASSNAME)"可以访问类的静态方法和常量-->
+        <property name="pi" value="#{T(Math).PI}" />
+        <property name="percent" value="#{T(Math).random()}" />
+    </bean>
+
+
 </beans>

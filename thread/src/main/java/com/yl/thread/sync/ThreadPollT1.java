@@ -13,12 +13,24 @@ public class ThreadPollT1 {
 
     public static void main(String[] args){
         ExecutorService executorService = Executors.newFixedThreadPool(1);
+        /*executorService.execute(new MyTask1());
         executorService.execute(new MyTask1());
         executorService.execute(new MyTask1());
         executorService.execute(new MyTask1());
-        executorService.execute(new MyTask1());
-        executorService.execute(new MyTask1());
-        executorService.shutdown();
+        executorService.execute(new MyTask1());*/
+
+
+        for(int i = 0; i < 3; i++){
+            System.out.println("add Task");
+            executorService.execute(new MyTask1());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }// end for
+
+        /// executorService.shutdown();// 测试不关闭的情况
     }
 
 

@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * Created by leon on 2016/1/21.
  */
-public class MyClient1 {
+public class MyClient2 {
     public static void main(String[] args){
         int port = 10001;
         String host = "localhost";
@@ -34,7 +34,7 @@ public class MyClient1 {
             e.printStackTrace();
         }
         try {
-            out.writeDouble(8.9);  // may produce NullPointerException
+            out.writeDouble(9.9);  // may produce NullPointerException
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,21 +45,19 @@ public class MyClient1 {
             e.printStackTrace();
         }
 
-
-
-        System.out.println("end");
-
         Scanner scanner = new Scanner(System.in);
         System.out.print("input a double:");
         double num = scanner.nextDouble();
         System.out.println("num: " + num);
 
+        System.out.println("end");
 
         try {
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         /*try {
             System.out.println(in.readDouble());

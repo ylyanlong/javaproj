@@ -8,6 +8,7 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
 
+    <context:annotation-config />
     <!--&lt;!&ndash; 自动扫描quick4j包 ,将带有注解的类 纳入spring容器管理 &ndash;&gt;
     <context:component-scan base-package="com.yl.spring">
            &lt;!&ndash;<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -18,10 +19,20 @@
         <property name="message" value="Hello World"/>
     </bean>
 
+    <!--<bean id="helloWorld" class="com.yl.spring.beans.HelloWorld">
+        <constructor-arg name="message" value="constructor yl" />
+    </bean>-->
 
-    <bean id="java" class="com.yl.spring.beans.JavaLanguage"/>
 
-    <bean id="cpp" class="com.yl.spring.beans.CppLanguage"/>
+    <bean id="java" class="com.yl.spring.beans.JavaLanguage" />
+    <!--取消多个匹配项-->
+    <!--<bean id="java" class="com.yl.spring.beans.JavaLanguage" autowire-candidate="false" />-->
+
+
+    <bean id="cpp" class="com.yl.spring.beans.CppLanguage">
+        <!--和另外两种方法是互斥的-->
+        <!--<qualifier value="cppqualifier2" />-->
+    </bean>
 
     <!--1.通过构造函数注入 （原始方式)；此时是根据位置顺序来定位的，会将相应的字符串转为对应的参数类型，转换失败，就会报错-->
     <bean id="leader1" class="com.yl.spring.beans.LeaderA">
@@ -162,5 +173,28 @@
         <property name="percent" value="#{T(Math).random()}" />
     </bean>
 
+    <!--自动装配-->
+    <!--byName和byType 应该属于setter()方式注入的类型; construtor 应该属于构造器注入的类型-->
+    <!--byName, 找该类或者其子类中Bean id 相同的。类型不匹配，只bean id 对得上的是报错-->
+    <bean id="autowiringBean" class="com.yl.spring.beans.AutowiringBeanByname" autowire="byName" />
+
+    <!--byType, -->
+    <bean id="autowiringBeanBytype1" class="com.yl.spring.beans.AutowiringBeanBytype1" autowire="byType" />
+
+    <!--有多个类或者子类类型匹配时，会报错；即使配置了primary="false"也不起作用-->
+    <!--autowire-candidate="false" 是起作用的；下面的是可用的-->
+    <!--<bean id="autowiringBeanBytype2" class="com.yl.spring.beans.AutowiringBeanBytype2" autowire="byType" />-->
+
+    <!--构造器装配-->
+    <bean id="autowiringBeanBycst" class="com.yl.spring.beans.AutowiringBeanBycst" autowire="constructor" />
+
+    <!--注解注入-->
+    <bean id="programmerA" class="com.yl.spring.beans.ProgrammerA" />
+
+    <bean id="programmerB" class="com.yl.spring.beans.ProgrammerB" />
+
+    <bean id="programmerC" class="com.yl.spring.beans.ProgrammerC" />
+
+    <bean id="programmerD" class="com.yl.spring.beans.ProgrammerD" />
 
 </beans>

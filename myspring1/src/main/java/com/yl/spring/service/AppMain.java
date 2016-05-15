@@ -81,9 +81,38 @@ public class AppMain {
         //-------------SpEL-inject-test-begin----------------------
         // SpELLiteral spELLiteral = context.getBean("spELLiteral", SpELLiteral.class);
         // spELLiteral.show();
-        SpELReference spELReference = context.getBean("spELReference", SpELReference.class);
-        spELReference.show();
+        // SpELReference spELReference = context.getBean("spELReference", SpELReference.class);
+        // spELReference.show();
         //-------------SpEL-inject-test-end------------------------
+
+        //-------------Autowiring-test-begin----------------------
+        // AutowiringBeanByname autowiringBean = context.getBean("autowiringBean", AutowiringBeanByname.class);
+        // autowiringBean.show();
+
+        // AutowiringBeanBytype1 autowiringBeanBytype1 = context.getBean("autowiringBeanBytype1", AutowiringBeanBytype1.class);
+        // autowiringBeanBytype1.show();
+
+        // AutowiringBeanBytype2 autowiringBeanBytype2 = context.getBean("autowiringBeanBytype2", AutowiringBeanBytype2.class);
+        // autowiringBeanBytype2.show();
+
+        // AutowiringBeanBycst autowiringBeanBycst = context.getBean("autowiringBeanBycst", AutowiringBeanBycst.class);
+        // autowiringBeanBycst.show();
+
+        //-------------Autowiring-test-end------------------------
+
+        //-------------Annotation-test-begin----------------------
+        // ProgrammerA programmerA = context.getBean("programmerA", ProgrammerA.class);
+        // programmerA.show();
+
+        // ProgrammerB programmerB = context.getBean("programmerB", ProgrammerB.class);
+        // programmerB.show();
+
+        // ProgrammerC programmerC = context.getBean("programmerC", ProgrammerC.class);
+        // programmerC.show();
+
+        ProgrammerD programmerD = context.getBean("programmerD", ProgrammerD.class);
+        programmerD.show();
+        //-------------Annotation-test-end------------------------
 
     }
 }

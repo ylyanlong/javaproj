@@ -17,6 +17,14 @@
             <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>&ndash;&gt;
      </context:component-scan>-->
 
+    <bean id="duke" class="com.yl.spring.aopxml.Juggler" />
+
+    <bean id="audience2" class="com.yl.spring.aopxml.Audience2" />
+
+    <bean id="magician" class="com.yl.spring.aopxml.Magician" />
+
+    <bean id="volunteer" class="com.yl.spring.aopxml.Volunteer" />
+
     <bean id="hello" class="com.yl.spring.aop.Hello">
 
     </bean>
@@ -35,11 +43,38 @@
     </bean>
 
     <aop:config>
+            <!--声明切面，引用bean提供了应用于切面的通知所调用的方法-->
            <aop:aspect ref="minstrel">
+                  <!--切点-->
                   <aop:pointcut id="embark" expression="execution(* *.embarkOnQuest(..))" />
+                  <!--通知-->
                   <aop:before pointcut-ref="embark" method="singBeforeQuest"/>
                   <aop:after pointcut-ref="embark" method="singAfterQuest"/>
            </aop:aspect>
+
+            <aop:aspect ref="audience2">
+                <aop:pointcut id="performance2" expression="execution(* *.perform(..))" />
+                <!--<aop:before pointcut-ref="performance2" method="takeSeats" />
+                <aop:before pointcut-ref="performance2" method="takeOffCellPhones" />
+                <aop:after-returning pointcut-ref="performance2" method="applaud" />
+                <aop:after-throwing pointcut-ref="performance2" method="demandRefund" />-->
+                <aop:around pointcut-ref="performance2" method="watchPerformance" />
+            </aop:aspect>
+
+            <aop:aspect ref="magician">
+                <!--如果是多参数，并且类型各不相同应该怎么处理-->
+                <aop:pointcut id="thinking" expression="execution(* com.yl.spring.aopxml.Thinker.thinkOfSomething(String))
+                and args(thoughts)" />
+                <aop:before pointcut-ref="thinking" method="interceptThoughts" arg-names="thoughts" />
+            </aop:aspect>
+
+            <aop:aspect>
+                <aop:declare-parents
+                        types-matching="com.yl.spring.aopxml.Performer+"
+                        implement-interface="com.yl.spring.aopxml.Contestant"
+                        default-impl="com.yl.spring.aopxml.GraciousContestant"
+                        />
+            </aop:aspect>
     </aop:config>
 
 </beans>

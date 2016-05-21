@@ -18,7 +18,7 @@ public class MyMapT1 {
 
         Set<String> keys = hashMap.keySet();
         System.out.println("keys: " + keys);
-        for(String ele: keys){
+        /*for(String ele: keys){
             if(ele.equals("Cook")){
                 // hashMap.put(ele, 45);
                 hashMap.put("yan", 25);
@@ -32,7 +32,7 @@ public class MyMapT1 {
             if(key.equals("yan")){
                 hashMap.put("yan2", 29);
             }
-        }
+        }*/
 
         Collection<Integer> values = hashMap.values();
         System.out.println("values: " + values);

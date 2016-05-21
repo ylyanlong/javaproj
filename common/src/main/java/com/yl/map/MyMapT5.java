@@ -21,5 +21,17 @@ public class MyMapT5 {
 
         Map<Integer, Integer> map = new HashMap();
         System.out.println("map isEmpty:" + map.isEmpty());
+
+        Collection<String> values = linkedHashMap.values();
+        int i = 0;
+        for(String ele: values){
+            if(i != 0){
+                System.out.print(", ");
+            }
+
+            System.out.print(ele);
+
+            i++;
+        }
     }
 }

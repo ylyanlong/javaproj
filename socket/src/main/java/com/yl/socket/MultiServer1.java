@@ -3,10 +3,7 @@ package com.yl.socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
@@ -62,23 +59,36 @@ public class MultiServer1 {
 
         @Override
         public void run() {
-            DataInputStream in = null;
-            DataOutputStream out = null;
+            BufferedReader in = null;
+            PrintWriter out = null;
 
             try {
-                while (true){
-                    in = new DataInputStream(socket.getInputStream());
-                    out = new DataOutputStream(socket.getOutputStream());
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                out = new PrintWriter(socket.getOutputStream());
 
-                    System.out.println(in.readDouble());
-                    out.writeDouble(0.6 + counter);
+                while (true){
+                    // in and out is here
+                    //System.out.println("enter while");
+                    String cmd = in.readLine();
+                    if(cmd == null){
+                        System.out.println("cmd is null");
+                        break;
+                    }
+                    System.out.println("client:" + cmd);
+                    out.println("server: " + cmd);
+                    out.flush();
                 }// end while
-            } /*catch (EOFException e){
-                LOG.info("EOFException in while");
-                e.printStackTrace();
-            }*/ catch (IOException e) {
+            } catch (IOException e) {
                 LOG.info("IOException in while");
                 // e.printStackTrace();
+            }finally {
+                try {
+                    out.close();
+                    in.close();
+                    socket.close();
+                } catch (Exception e) {
+                    LOG.error("CommandService socket close fail!", e);
+                }
             }
 
             LOG.info("HandleClient:{} close", counter);

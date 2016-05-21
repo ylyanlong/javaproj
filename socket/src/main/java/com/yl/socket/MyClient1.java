@@ -1,8 +1,6 @@
 package com.yl.socket;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -13,8 +11,8 @@ public class MyClient1 {
     public static void main(String[] args){
         int port = 10001;
         String host = "localhost";
-        DataInputStream in = null;
-        DataOutputStream out = null;
+        BufferedReader in = null;
+        PrintWriter out = null;
         Socket socket = null;
 
         try {
@@ -24,36 +22,41 @@ public class MyClient1 {
         }
 
         try {
-            in = new DataInputStream(socket.getInputStream());  // may produce NullPointerException
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
-            out = new DataOutputStream(socket.getOutputStream());
+            out = new PrintWriter(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try {
-            out.writeDouble(8.9);  // may produce NullPointerException
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            System.out.println(in.readDouble());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-
-        System.out.println("end");
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("input a double:");
-        double num = scanner.nextDouble();
-        System.out.println("num: " + num);
+        System.out.print("input cmd:");
+        try {
+            String cmd = scanner.nextLine();
+            while (!cmd.equals("quit")){
+                System.out.println("cmd:" + cmd);
 
+                //----------------------------------
+                out.print(cmd + "\r\n");
+                out.flush();
+                // System.out.println("out.flush()");
+
+                try {
+                    System.out.println(in.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                //------------------------------------
+
+                System.out.print("input cmd:");
+                cmd = scanner.nextLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
             socket.close();
@@ -61,10 +64,6 @@ public class MyClient1 {
             e.printStackTrace();
         }
 
-        /*try {
-            System.out.println(in.readDouble());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+        System.out.println("end");
     }
 }

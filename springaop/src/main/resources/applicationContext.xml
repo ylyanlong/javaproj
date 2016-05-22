@@ -12,14 +12,18 @@
 
 
     <!-- 自动扫描quick4j包 ,将带有注解的类 纳入spring容器管理 -->
-    <!-- <context:component-scan base-package="com.yl.spring.aop">
-            &lt;!&ndash;<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-            <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>&ndash;&gt;
-     </context:component-scan>-->
+     <context:component-scan base-package="com.yl.spring">
+            <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+            <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>-->
+     </context:component-scan>
+
+    <aop:aspectj-autoproxy />
 
     <bean id="duke" class="com.yl.spring.aopxml.Juggler" />
 
     <bean id="audience2" class="com.yl.spring.aopxml.Audience2" />
+
+    <!--<bean id="audience3" class="com.yl.spring.aopannotation.Audience3" />-->
 
     <bean id="magician" class="com.yl.spring.aopxml.Magician" />
 
@@ -42,27 +46,27 @@
         <constructor-arg value="#{T(System).out}"/>
     </bean>
 
-    <aop:config>
-            <!--声明切面，引用bean提供了应用于切面的通知所调用的方法-->
+    <!--<aop:config>
+            &lt;!&ndash;声明切面，引用bean提供了应用于切面的通知所调用的方法&ndash;&gt;
            <aop:aspect ref="minstrel">
-                  <!--切点-->
+                  &lt;!&ndash;切点&ndash;&gt;
                   <aop:pointcut id="embark" expression="execution(* *.embarkOnQuest(..))" />
-                  <!--通知-->
+                  &lt;!&ndash;通知&ndash;&gt;
                   <aop:before pointcut-ref="embark" method="singBeforeQuest"/>
                   <aop:after pointcut-ref="embark" method="singAfterQuest"/>
            </aop:aspect>
 
-            <aop:aspect ref="audience2">
+            &lt;!&ndash;<aop:aspect ref="audience2">
                 <aop:pointcut id="performance2" expression="execution(* *.perform(..))" />
-                <!--<aop:before pointcut-ref="performance2" method="takeSeats" />
+                &lt;!&ndash;<aop:before pointcut-ref="performance2" method="takeSeats" />
                 <aop:before pointcut-ref="performance2" method="takeOffCellPhones" />
                 <aop:after-returning pointcut-ref="performance2" method="applaud" />
-                <aop:after-throwing pointcut-ref="performance2" method="demandRefund" />-->
+                <aop:after-throwing pointcut-ref="performance2" method="demandRefund" />&ndash;&gt;
                 <aop:around pointcut-ref="performance2" method="watchPerformance" />
-            </aop:aspect>
+            </aop:aspect>&ndash;&gt;
 
             <aop:aspect ref="magician">
-                <!--如果是多参数，并且类型各不相同应该怎么处理-->
+                &lt;!&ndash;如果是多参数，并且类型各不相同应该怎么处理&ndash;&gt;
                 <aop:pointcut id="thinking" expression="execution(* com.yl.spring.aopxml.Thinker.thinkOfSomething(String))
                 and args(thoughts)" />
                 <aop:before pointcut-ref="thinking" method="interceptThoughts" arg-names="thoughts" />
@@ -75,6 +79,6 @@
                         default-impl="com.yl.spring.aopxml.GraciousContestant"
                         />
             </aop:aspect>
-    </aop:config>
+    </aop:config>-->
 
 </beans>

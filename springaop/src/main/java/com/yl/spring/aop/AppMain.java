@@ -1,5 +1,6 @@
 package com.yl.spring.aop;
 
+import com.yl.spring.aopannotation.Magician2;
 import com.yl.spring.aopxml.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -42,9 +43,21 @@ public class AppMain {
         /*GraciousContestant juggler = context.getBean("duke", GraciousContestant.class);
         juggler.receiveAward();*/
 
-        Contestant juggler = context.getBean("duke", Contestant.class);
-        juggler.receiveAward();
+        /*Contestant juggler = context.getBean("duke", Contestant.class);
+        juggler.receiveAward();*/
         //--------------AOP-XML-配置-end---------------------------
+
+     //--------------AOP-注解-配置-begin---------------------------
+     // Performer performer = context.getBean("duke", Juggler.class);  // 有报错
+     /*Performer performer = context.getBean("duke", Performer.class);
+     performer.perform();*/
+
+     // 处理有参数的情况
+     Thinker thinker = context.getBean("volunteer", Thinker.class);
+     thinker.thinkOfSomething("how to be the best one!!");
+     Magician2 mindReader = context.getBean("magician2", Magician2.class);
+     System.out.println("intercept: " + mindReader.getThoughts());
+     //--------------AOP-注解-配置-end-----------------------------
 
     }
 }

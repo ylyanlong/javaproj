@@ -8,7 +8,13 @@ import org.apache.thrift.TException;
 public class HelloWorldImpl implements HelloWorld.Iface {
     @Override
     public String sayHello(String username) throws TException {
-        return "hello world" + username;
+        /*try {
+            Thread.sleep(1000 * 10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+
+        return "hello world: " + username;
     }
 
 

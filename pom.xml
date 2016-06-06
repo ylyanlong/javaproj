@@ -19,6 +19,7 @@
         <module>myspring1</module>
         <module>myweb1</module>
         <module>springaop</module>
+        <module>redis</module>
     </modules>
 
     <properties>
@@ -37,6 +38,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <spring.version>4.2.3.RELEASE</spring.version>
+        <aspectj.version>1.8.7</aspectj.version>
+
+        <spring.data.redis.version>1.7.1.RELEASE</spring.data.redis.version>
+        <jedis.version>2.8.0</jedis.version>
     </properties>
 
     <dependencyManagement>
@@ -160,6 +165,34 @@
                 <version>${spring.version}</version>
             </dependency>
             <!-- springframe end -->
+
+            <!-- aop begin -->
+            <!--<dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+                <scope>runtime</scope>
+            </dependency>-->
+            <!-- aop end -->
+
+            <!--redis begin-->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${spring.data.redis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+            <!--redis end-->
+
         </dependencies>
     </dependencyManagement>
 

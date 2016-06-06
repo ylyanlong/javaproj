@@ -53,11 +53,20 @@ public class AppMain {
      performer.perform();*/
 
      // 处理有参数的情况
-     Thinker thinker = context.getBean("volunteer", Thinker.class);
+     /*Thinker thinker = context.getBean("volunteer", Thinker.class);
      thinker.thinkOfSomething("how to be the best one!!");
      Magician2 mindReader = context.getBean("magician2", Magician2.class);
-     System.out.println("intercept: " + mindReader.getThoughts());
+     System.out.println("intercept: " + mindReader.getThoughts());*/
+
+     // 标注引入
+     /*Contestant juggler = context.getBean("duke", Contestant.class);
+     juggler.receiveAward();*/
      //--------------AOP-注解-配置-end-----------------------------
+
+     //--------------AOP-ASPECTJ-begin------------------------------
+     Performer performer = context.getBean("duke", Performer.class);
+     performer.perform();
+     //--------------AOP-ASPECTJ-end--------------------------------
 
     }
 }

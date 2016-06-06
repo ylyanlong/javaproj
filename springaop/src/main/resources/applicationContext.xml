@@ -46,6 +46,19 @@
         <constructor-arg value="#{T(System).out}"/>
     </bean>
 
+    <bean id="criticismEngine" class="com.yl.spring.aopannotation.CriticismEngineImpl" >
+        <property name="criticismPool">
+            <list>
+                <value>l am not being rude</value>
+                <value>do every a favor</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="com.yl.spring.aopannotation.JudgeAspect" factory-method="aspectOf">
+        <property name="criticismEngine" ref="criticismEngine" />
+    </bean>
+
     <!--<aop:config>
             &lt;!&ndash;声明切面，引用bean提供了应用于切面的通知所调用的方法&ndash;&gt;
            <aop:aspect ref="minstrel">

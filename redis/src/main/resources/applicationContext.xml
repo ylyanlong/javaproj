@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/data/mongo
+       http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+       http://www.springframework.org/schema/cache
+       http://www.springframework.org/schema/cache/spring-cache.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 自动扫描quick4j包 ,将带有注解的类 纳入spring容器管理 -->
+    <context:component-scan base-package="com.yl.redis">
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>-->
+    </context:component-scan>
+
+    <!--启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效-->
+    <cache:annotation-driven/>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+           <property name="locations">
+                  <list>
+                         &lt;!&ndash;<value>classpath*:application.properties</value>&ndash;&gt;
+                         <value>classpath*:application-redis.properties</value>
+                         &lt;!&ndash;<value>classpath*:redis.properties</value>&ndash;&gt;
+                  </list>
+           </property>
+    </bean>-->
+
+    <!--<mongo:mongo host="127.0.0.1" port="27017" />
+    <mongo:db-factory dbname="entrecomt1" mongo-ref="mongo" />
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+           <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+    </bean>-->
+
+
+    <import resource="classpath*:/application-context-jedis.xml"/>
+
+
+
+</beans>

@@ -1,0 +1,115 @@
+# barrier
+
+# 不需要创建好节点，会自动创建的
+zk: 116.31.122.111:2181(CONNECTED) 21] ls /ylzktest
+[test4, test5, test2, test3, lock, leaderSelect, test1, queue]
+# 已经创建
+[zk: 116.31.122.111:2181(CONNECTED) 22] ls /ylzktest
+[test4, test5, test2, test3, barrier, lock, leaderSelect, test1, queue]
+# 没有子节点
+[zk: 116.31.122.111:2181(CONNECTED) 23] ls /ylzktest/barrier
+[]
+# 是永久节点
+[zk: 116.31.122.111:2181(CONNECTED) 24] get  /ylzktest/barrier
+172.19.43.162
+cZxid = 0x904dabac7
+ctime = Fri Jul 01 11:55:50 CST 2016
+mZxid = 0x904dabac7
+mtime = Fri Jul 01 11:55:50 CST 2016
+pZxid = 0x904dabac7
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 13
+numChildren = 0
+# 查看内容
+[zk: 116.31.122.111:2181(CONNECTED) 25] get /ylzktest/barrier
+172.19.43.162
+cZxid = 0x904dabac7
+ctime = Fri Jul 01 11:55:50 CST 2016
+mZxid = 0x904dabac7
+mtime = Fri Jul 01 11:55:50 CST 2016
+pZxid = 0x904dabac7
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 13
+numChildren = 0
+# 移除后已经被删除
+[zk: 116.31.122.111:2181(CONNECTED) 26] ls /ylzktest
+[test4, test5, test2, test3, lock, leaderSelect, test1, queue]
+
+
+
+# DistributedDoubleBarrier
+# 未开始运行时，没有barrier这个 znode
+[zk: 116.31.122.111:2181(CONNECTED) 14] ls /ylzktest
+[test4, test5, test2, test3, lock, leaderSelect, test1, queue]
+# 运行后，代码自己创建了这个znode
+[zk: 116.31.122.111:2181(CONNECTED) 15] ls /ylzktest
+[test4, test5, test2, test3, barrier, lock, leaderSelect, test1, queue]
+# 等待状态，创建了一个临时节点
+[zk: 116.31.122.111:2181(CONNECTED) 16] ls /ylzktest/barrier
+[cd24b116-1079-484b-9fa4-209e3640c211]
+[zk: 116.31.122.111:2181(CONNECTED) 17] ls /ylzktest/barrier/cd24b116-1079-484b-9fa4-209e3640c211
+[]
+# 验证是临时节点
+[zk: 116.31.122.111:2181(CONNECTED) 18] get /ylzktest/barrier/cd24b116-1079-484b-9fa4-209e3640c211
+172.19.43.162
+cZxid = 0x9051f2f8e
+ctime = Mon Jul 04 11:08:02 CST 2016
+mZxid = 0x9051f2f8e
+mtime = Mon Jul 04 11:08:02 CST 2016
+pZxid = 0x9051f2f8e
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x2549ad85e56d472
+dataLength = 13
+numChildren = 0
+[zk: 116.31.122.111:2181(CONNECTED) 19] ls /ylzktest/barrier
+[cd24b116-1079-484b-9fa4-209e3640c211]
+# barrier.enter() 后，之前的临时节点被删掉；创建新的节点，如下所示
+[zk: 116.31.122.111:2181(CONNECTED) 20] ls /ylzktest/barrier
+[4118ea97-5285-41b0-b158-f50f98eadddd, ready]
+[zk: 116.31.122.111:2181(CONNECTED) 21] ls /ylzktest/barrier/4118ea97-5285-41b0-b158-f50f98eadddd
+[]
+# 临时节点
+[zk: 116.31.122.111:2181(CONNECTED) 22] get /ylzktest/barrier/4118ea97-5285-41b0-b158-f50f98eadddd
+172.19.43.162
+cZxid = 0x9051f360f
+ctime = Mon Jul 04 11:09:31 CST 2016
+mZxid = 0x9051f360f
+mtime = Mon Jul 04 11:09:31 CST 2016
+pZxid = 0x9051f360f
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x155acfc93b9000c
+dataLength = 13
+numChildren = 0
+[zk: 116.31.122.111:2181(CONNECTED) 23] ls /ylzktest/barrier/ready
+[]
+# 永久节点
+[zk: 116.31.122.111:2181(CONNECTED) 24] get /ylzktest/barrier/ready
+172.19.43.162
+cZxid = 0x9051f3610
+ctime = Mon Jul 04 11:09:31 CST 2016
+mZxid = 0x9051f3610
+mtime = Mon Jul 04 11:09:31 CST 2016
+pZxid = 0x9051f3610
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 13
+numChildren = 0
+[zk: 116.31.122.111:2181(CONNECTED) 25] ls /ylzktest/barrier
+[4118ea97-5285-41b0-b158-f50f98eadddd, ready]
+# barrier.leave() 后两个节点都被删掉
+[zk: 116.31.122.111:2181(CONNECTED) 26] ls /ylzktest/barrier
+[]
+
+

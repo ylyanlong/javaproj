@@ -23,7 +23,7 @@ public class Apple extends Fruit {
     public void taste(){}
 
     // @SuppressWarnings(value = {"unchecked", "fallthrough"})
-    @SuppressWarnings({"unchecked", "fallthrough"})
+    @SuppressWarnings({"unchecked", "fallthrough"})   // 注意发音的尾音是 s；而 surprise 的尾音是 z
     public void showAttrs(){
         try {
             int b = 0;

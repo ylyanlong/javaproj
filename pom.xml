@@ -20,6 +20,9 @@
         <module>myweb1</module>
         <module>springaop</module>
         <module>redis</module>
+        <module>spring-mybatis</module>
+        <module>zookeeper</module>
+        <module>hadoop</module>
     </modules>
 
     <properties>

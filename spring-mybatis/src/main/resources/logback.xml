@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true">
+	<property name="LOG_HOME" value="/data/weblog/tomcat/entstat.yy.com" />
+
+	<appender name="error_file"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/web_error_%d{yyyy-MM-dd}_%i.log.zip
+			</fileNamePattern>
+			<maxHistory>7</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<file>${LOG_HOME}/web_error.log</file>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%date [%thread] [%file:%line] [%level %logger{0}] - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="warn_file"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/web_warn_%d{yyyy-MM-dd}_%i.log.zip
+			</fileNamePattern>
+			<maxHistory>7</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<file>${LOG_HOME}/web_warn.log</file>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%date [%thread] [%file:%line] [%level %logger{0}] - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="info_file"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/web_info_%d{yyyy-MM-dd}_%i.log.zip
+			</fileNamePattern>
+			<maxHistory>7</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<file>${LOG_HOME}/web_info.log</file>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%date [%thread] [%file:%line] [%level %logger{0}] - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="debug_file"
+			  class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/web_debug_%d{yyyy-MM-dd}_%i.log.zip
+			</fileNamePattern>
+			<maxHistory>7</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+			<timeBasedFileNamingAndTriggeringPolicy
+					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<file>${LOG_HOME}/web_debug.log</file>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%date [%thread] [%file:%line] [%level %logger{0}] - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<!--测试begin-->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date [%thread] [%level %logger{0}:%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.yy" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="com.yy.entstat.mapper" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="org.apache.shiro" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+
+
+
+	<logger name="com.yy.entstat.mapper" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<logger name="com.yy.entstat.dao" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<logger name="redis.clients" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="org.springframework.data" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<!--二选一-->
+	<!--log4jdbc
+	<logger name="jdbc.sqltiming" level="debug"/>
+	<logger name="com.ibatis" level="debug" />
+	<logger name="com.ibatis.common.jdbc.SimpleDataSource" level="debug" />
+	<logger name="com.ibatis.common.jdbc.ScriptRunner" level="debug" />
+	<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate"
+			level="debug" />
+	<logger name="java.sql.Connection" level="debug" />
+	<logger name="java.sql.Statement" level="debug" />
+	<logger name="java.sql.PreparedStatement" level="debug" />
+	<logger name="java.sql.ResultSet" level="debug" />-->
+	<!--测试end-->
+
+
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="debug_file" />
+		<appender-ref ref="warn_file" />
+		<appender-ref ref="info_file" />
+		<appender-ref ref="error_file" />
+	</root>
+</configuration>

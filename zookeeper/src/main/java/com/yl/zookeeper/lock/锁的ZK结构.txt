@@ -1,0 +1,332 @@
+可重入锁
+# 各进程会在给定的路径下面创建临时节点，有编号的；编号小的优先获得锁
+[zk: 116.31.122.111:2181(CONNECTED) 93] ls /ylzktest/lock
+[_c_8af77ffb-5371-46c3-8c2f-9b251c578d76-lock-0000000005, _c_62176455-2b44-4fc0-b593-85a1c219d780-lock-0000000004]
+[zk: 116.31.122.111:2181(CONNECTED) 94] ls /ylzktest/lock/_c_8af77ffb-5371-46c3-8c2f-9b251c578d76-lock-0000000005
+[]
+# 验证了下确实是临时节点
+[zk: 116.31.122.111:2181(CONNECTED) 95] get /ylzktest/lock/_c_8af77ffb-5371-46c3-8c2f-9b251c578d76-lock-0000000005
+172.19.43.162
+cZxid = 0x904abd689
+ctime = Wed Jun 29 10:20:57 CST 2016
+mZxid = 0x904abd689
+mtime = Wed Jun 29 10:20:57 CST 2016
+pZxid = 0x904abd689
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x2549ad85e56d44a
+dataLength = 13
+numChildren = 0
+# 释放锁后，临时节点被删除
+[zk: 116.31.122.111:2181(CONNECTED) 96] ls /ylzktest/lock
+[_c_8af77ffb-5371-46c3-8c2f-9b251c578d76-lock-0000000005]
+# 都释放锁了
+[zk: 116.31.122.111:2181(CONNECTED) 97] ls /ylzktest/lock
+[]
+
+
+不可重入锁
+# ZK 的路径下面有两个 znode: leases 和 locks
+# 个人猜测：leases 下面创建的是临时节点，取节点编号小的获得锁；locks 下面是未获得锁的
+[zk: 116.31.122.111:2181(CONNECTED) 118] ls /ylzktest/lock/leases
+[_c_6a3fa6da-4b1e-45a2-8c13-e81813ee767e-lease-0000000004, _c_0edcd60b-0db4-411b-ae0f-2971b743ff38-lease-0000000005]
+[zk: 116.31.122.111:2181(CONNECTED) 119] ls /ylzktest/lock/locks
+[_c_66a8f1f1-fe92-46cc-88cd-3609504f1df3-lock-0000000005]
+# 当前没有未获得锁的后，locks 目录下为空
+[zk: 116.31.122.111:2181(CONNECTED) 124] ls /ylzktest/lock/locks
+[]
+
+# 验证临时节点
+[zk: 116.31.122.111:2181(CONNECTED) 113] get /ylzktest/lock/leases/_c_730eb2d9-29de-48d0-ad92-ea2e130277d0-lease-0000000001
+172.19.43.162
+cZxid = 0x904aca66b
+ctime = Wed Jun 29 11:12:58 CST 2016
+mZxid = 0x904aca66b
+mtime = Wed Jun 29 11:12:58 CST 2016
+pZxid = 0x904aca66b
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x2549ad85e56d44b
+dataLength = 13
+numChildren = 0
+
+# 验证临时节点
+[zk: 116.31.122.111:2181(CONNECTED) 126] get /ylzktest/lock/locks/_c_4cc10220-1149-4b5e-8508-d562138540f8-lock-0000000007
+172.19.43.162
+cZxid = 0x904acde68
+ctime = Wed Jun 29 11:27:18 CST 2016
+mZxid = 0x904acde68
+mtime = Wed Jun 29 11:27:18 CST 2016
+pZxid = 0x904acde68
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x2549ad85e56d44d
+dataLength = 13
+numChildren = 0
+
+# 先启动线程2 的写锁；再启动线程1的写锁
+[zk: 116.31.122.111:2181(CONNECTED) 182] ls /ylzktest/lock/leases
+[]
+[zk: 116.31.122.111:2181(CONNECTED) 183] ls /ylzktest/lock/locks
+[]
+[zk: 116.31.122.111:2181(CONNECTED) 184] ls /ylzktest/lock
+[leases, locks]
+# 启动线程2 的写锁
+[zk: 116.31.122.111:2181(CONNECTED) 186] ls /ylzktest/lock/leases
+[_c_a32bf9f5-8ad8-44b2-b6d2-ad1652ed57f1-lease-0000000011]
+[zk: 116.31.122.111:2181(CONNECTED) 187] ls /ylzktest/lock/locks
+[]
+# 启动线程1的写锁
+[zk: 116.31.122.111:2181(CONNECTED) 188] ls /ylzktest/lock/leases
+[_c_a32bf9f5-8ad8-44b2-b6d2-ad1652ed57f1-lease-0000000011, _c_f4a58375-20b1-4298-8759-d6a81a6f3dca-lease-0000000012]
+# locks 目录下有节点
+[zk: 116.31.122.111:2181(CONNECTED) 189] ls /ylzktest/lock/locks
+[_c_0e0eae58-8f55-4d45-a3da-8ff897c09b41-lock-0000000012]
+[zk: 116.31.122.111:2181(CONNECTED) 190] ls /ylzktest/lock/leases
+[_c_a32bf9f5-8ad8-44b2-b6d2-ad1652ed57f1-lease-0000000011, _c_f4a58375-20b1-4298-8759-d6a81a6f3dca-lease-0000000012]
+# 验证是临时节点
+[zk: 116.31.122.111:2181(CONNECTED) 191] get /ylzktest/lock/leases/_c_f4a58375-20b1-4298-8759-d6a81a6f3dca-lease-0000000012
+172.19.43.162
+cZxid = 0x904b2503d
+ctime = Wed Jun 29 17:03:21 CST 2016
+mZxid = 0x904b2503d
+mtime = Wed Jun 29 17:03:21 CST 2016
+pZxid = 0x904b2503d
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x15573b15d5d0031
+dataLength = 13
+numChildren = 0
+# 进程1 已结释放锁
+[zk: 116.31.122.111:2181(CONNECTED) 192] ls /ylzktest/lock/leases
+[_c_f4a58375-20b1-4298-8759-d6a81a6f3dca-lease-0000000012]
+[zk: 116.31.122.111:2181(CONNECTED) 193] get /ylzktest/lock/leases/_c_f4a58375-20b1-4298-8759-d6a81a6f3dca-lease-0000000012
+172.19.43.162
+cZxid = 0x904b2503d
+ctime = Wed Jun 29 17:03:21 CST 2016
+mZxid = 0x904b2503d
+mtime = Wed Jun 29 17:03:21 CST 2016
+pZxid = 0x904b2503d
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x15573b15d5d0031
+dataLength = 13
+numChildren = 0
+###
+
+
+#读写锁
+# 先申请写锁，写锁降级为读锁，释放两个锁；另外一个线程申请 读锁
+# 都是临时节点，有编号，有读写标识
+[zk: 116.31.122.111:2181(CONNECTED) 134] ls /ylzktest/lock
+[_c_c97077a8-13ca-4c7a-b343-05216bdb5ea7-__READ__0000000009, _c_22dbafed-0ccf-4ee9-9c87-31d19b0cd245-__READ__0000000010, _c_a2466ee4-8482-4efa-a86f-0f7d4711df57-__WRIT__0000000008]
+[zk: 116.31.122.111:2181(CONNECTED) 135] ls /ylzktest/lock/_c_c97077a8-13ca-4c7a-b343-05216bdb5ea7-__READ__0000000009
+[]
+[zk: 116.31.122.111:2181(CONNECTED) 136] get /ylzktest/lock/_c_c97077a8-13ca-4c7a-b343-05216bdb5ea7-__READ__0000000009
+172.19.43.162
+cZxid = 0x904afc6d9
+ctime = Wed Jun 29 14:27:25 CST 2016
+mZxid = 0x904afc6d9
+mtime = Wed Jun 29 14:27:25 CST 2016
+pZxid = 0x904afc6d9
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x2549ad85e56d44e
+dataLength = 13
+numChildren = 0
+[zk: 116.31.122.111:2181(CONNECTED) 137] ls /ylzktest/lock/_c_22dbafed-0ccf-4ee9-9c87-31d19b0cd245-__READ__0000000010
+[]
+[zk: 116.31.122.111:2181(CONNECTED) 138] ls /ylzktest/lock/_c_a2466ee4-8482-4efa-a86f-0f7d4711df57-__WRIT__0000000008
+[]
+[zk: 116.31.122.111:2181(CONNECTED) 140] get /ylzktest/lock/_c_22dbafed-0ccf-4ee9-9c87-31d19b0cd245-__READ__0000000010
+172.19.43.162
+cZxid = 0x904afc738
+ctime = Wed Jun 29 14:27:30 CST 2016
+mZxid = 0x904afc738
+mtime = Wed Jun 29 14:27:30 CST 2016
+pZxid = 0x904afc738
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x15573b15d5d002f
+dataLength = 13
+numChildren = 0
+
+# 线程2先申请写锁；线程1申请写锁，写锁里面申请读锁
+# 注意 write 标识，因为 线程1 的写锁处于阻塞状态，所以里面的读锁没出来
+[zk: 116.31.122.111:2181(CONNECTED) 141] ls /ylzktest/lock
+[_c_84f3dffc-b4c4-44fd-8311-95c598439098-__WRIT__0000000012, _c_8db2c6fe-933a-4387-a225-2e1606481ebf-__WRIT__0000000011]
+# 临时节点
+[zk: 116.31.122.111:2181(CONNECTED) 142] get /ylzktest/lock/_c_84f3dffc-b4c4-44fd-8311-95c598439098-__WRIT__0000000012
+172.19.43.162
+cZxid = 0x904b0473a
+ctime = Wed Jun 29 14:58:13 CST 2016
+mZxid = 0x904b0473a
+mtime = Wed Jun 29 14:58:13 CST 2016
+pZxid = 0x904b0473a
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x3549ab27fe8d8ac
+dataLength = 13
+numChildren = 0
+[zk: 116.31.122.111:2181(CONNECTED) 143] get /ylzktest/lock/_c_8db2c6fe-933a-4387-a225-2e1606481ebf-__WRIT__0000000011
+172.19.43.162
+cZxid = 0x904b046dd
+ctime = Wed Jun 29 14:58:08 CST 2016
+mZxid = 0x904b046dd
+mtime = Wed Jun 29 14:58:08 CST 2016
+pZxid = 0x904b046dd
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x2549ad85e56d44f
+dataLength = 13
+numChildren = 0
+[zk: 116.31.122.111:2181(CONNECTED) 144] ls /ylzktest/lock
+[_c_84f3dffc-b4c4-44fd-8311-95c598439098-__WRIT__0000000012, _c_8db2c6fe-933a-4387-a225-2e1606481ebf-__WRIT__0000000011]
+# 线程1 申请到写锁，继而申请到读锁
+[zk: 116.31.122.111:2181(CONNECTED) 145] ls /ylzktest/lock
+[_c_84f3dffc-b4c4-44fd-8311-95c598439098-__WRIT__0000000012, _c_b7cb28ca-85be-4bde-ac58-814f60a10ff1-__READ__0000000013]
+[zk: 116.31.122.111:2181(CONNECTED) 146] get /ylzktest/lock/_c_b7cb28ca-85be-4bde-ac58-814f60a10ff1-__READ__0000000013
+172.19.43.162
+cZxid = 0x904b04af6
+ctime = Wed Jun 29 14:59:08 CST 2016
+mZxid = 0x904b04af6
+mtime = Wed Jun 29 14:59:08 CST 2016
+pZxid = 0x904b04af6
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x3549ab27fe8d8ac
+dataLength = 13
+numChildren = 0
+
+# 信号量
+# 未运行前
+[zk: 116.31.122.111:2181(CONNECTED) 165] ls /ylzktest/lock
+[]
+# 开始运行
+[zk: 116.31.122.111:2181(CONNECTED) 166] ls /ylzktest/lock
+[leases, locks]
+# 租约目录下，临时节点数等于申请的租约数
+[zk: 116.31.122.111:2181(CONNECTED) 167] ls /ylzktest/lock/leases
+[_c_e7e0608e-15d1-4f1d-896e-c4fdceebc388-lease-0000000005, _c_a06c4cca-9139-4bd3-a022-3d0994dd040e-lease-0000000003, _c_8e0c855a-bd7e-4ab2-bb76-a137924055d2-lease-0000000001, _c_0f1e9769-1ac4-4597-b574-88dcfb969443-lease-0000000004, _c_69f8190b-8db3-4177-b830-0e174f01961c-lease-0000000002, _c_9deeb118-d794-476d-8f12-42691a35774f-lease-0000000000]
+# 证明确实是临时节点
+[zk: 116.31.122.111:2181(CONNECTED) 168] get /ylzktest/lock/leases/_c_9deeb118-d794-476d-8f12-42691a35774f-lease-0000000000
+172.19.43.162
+cZxid = 0x904b1e940
+ctime = Wed Jun 29 16:39:14 CST 2016
+mZxid = 0x904b1e940
+mtime = Wed Jun 29 16:39:14 CST 2016
+pZxid = 0x904b1e940
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x3549ab27fe8d8ad
+dataLength = 13
+numChildren = 0
+[zk: 116.31.122.111:2181(CONNECTED) 170] get /ylzktest/lock/leases/_c_8e0c855a-bd7e-4ab2-bb76-a137924055d2-lease-0000000001
+172.19.43.162
+cZxid = 0x904b1e944
+ctime = Wed Jun 29 16:39:14 CST 2016
+mZxid = 0x904b1e944
+mtime = Wed Jun 29 16:39:14 CST 2016
+pZxid = 0x904b1e944
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x3549ab27fe8d8ad
+dataLength = 13
+numChildren = 0
+# 证明没有子节点了
+[zk: 116.31.122.111:2181(CONNECTED) 172] ls /ylzktest/lock/leases/_c_8e0c855a-bd7e-4ab2-bb76-a137924055d2-lease-0000000001
+[]
+# 再次申请 5 个租约还没执行到，locks 目录无节点
+[zk: 116.31.122.111:2181(CONNECTED) 173] ls /ylzktest/lock/locks
+[]
+# 视图申请 5 个租约，节点数增多
+[zk: 116.31.122.111:2181(CONNECTED) 174] ls /ylzktest/lock/leases
+[_c_453d15e2-c46d-40f4-b96e-0f6deacab612-lease-0000000010, _c_fe2c0e3f-c193-4085-b9a2-1f3d1057bb66-lease-0000000006, _c_379ca7f5-fdb4-41af-8b47-a29f6dbe324a-lease-0000000007, _c_126ae949-e572-4e14-bcf5-1a799fa458d8-lease-0000000008, _c_e7e0608e-15d1-4f1d-896e-c4fdceebc388-lease-0000000005, _c_a06c4cca-9139-4bd3-a022-3d0994dd040e-lease-0000000003, _c_8e0c855a-bd7e-4ab2-bb76-a137924055d2-lease-0000000001, _c_0f1e9769-1ac4-4597-b574-88dcfb969443-lease-0000000004, _c_69f8190b-8db3-4177-b830-0e174f01961c-lease-0000000002, _c_9deeb118-d794-476d-8f12-42691a35774f-lease-0000000000, _c_6b5d2f7d-fd31-4471-8655-b3387f255ead-lease-0000000009]
+# 该目录下面也有节点
+[zk: 116.31.122.111:2181(CONNECTED) 175] ls /ylzktest/lock/locks
+[_c_897c2fc6-2d5c-4706-896d-cf3bfa226ad7-lock-0000000010]
+# 临时节点
+[zk: 116.31.122.111:2181(CONNECTED) 176] get /ylzktest/lock/locks/_c_897c2fc6-2d5c-4706-896d-cf3bfa226ad7-lock-0000000010
+172.19.43.162
+cZxid = 0x904b1eee5
+ctime = Wed Jun 29 16:40:35 CST 2016
+mZxid = 0x904b1eee5
+mtime = Wed Jun 29 16:40:35 CST 2016
+pZxid = 0x904b1eee5
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x3549ab27fe8d8ad
+dataLength = 13
+numChildren = 0
+# 证明其没有子节点
+[zk: 116.31.122.111:2181(CONNECTED) 177] ls /ylzktest/lock/locks/_c_897c2fc6-2d5c-4706-896d-cf3bfa226ad7-lock-0000000010
+[]
+# 运行结束
+[zk: 116.31.122.111:2181(CONNECTED) 178] ls /ylzktest/lock/locks
+[]
+
+
+# 多锁对象
+# 可重入锁
+[zk: 116.31.122.111:2181(CONNECTED) 198] create /ylzktest/lock/lock1 "lock1"
+Created /ylzktest/lock/lock1
+[zk: 116.31.122.111:2181(CONNECTED) 199] create /ylzktest/lock/lock2 "lock2"
+Created /ylzktest/lock/lock2
+[zk: 116.31.122.111:2181(CONNECTED) 200] ls /ylzktest/lock
+[lock2, lock1]
+[zk: 116.31.122.111:2181(CONNECTED) 201] ls /ylzktest/lock
+[lock2, lock1]
+[zk: 116.31.122.111:2181(CONNECTED) 202] ls /ylzktest/lock/lock1
+[_c_f051b965-91b7-46a5-9ce2-d4d825d02879-lock-0000000000]
+[zk: 116.31.122.111:2181(CONNECTED) 203] ls /ylzktest/lock/lock1/_c_f051b965-91b7-46a5-9ce2-d4d825d02879-lock-0000000000
+[]
+[zk: 116.31.122.111:2181(CONNECTED) 204] get /ylzktest/lock/lock1/_c_f051b965-91b7-46a5-9ce2-d4d825d02879-lock-0000000000
+172.19.43.162
+cZxid = 0x904b4f5e7
+ctime = Wed Jun 29 19:46:07 CST 2016
+mZxid = 0x904b4f5e7
+mtime = Wed Jun 29 19:46:07 CST 2016
+pZxid = 0x904b4f5e7
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x2549ad85e56d451
+dataLength = 13
+numChildren = 0
+# 不可重入锁
+[zk: 116.31.122.111:2181(CONNECTED) 205] ls /ylzktest/lock/lock2
+[leases, locks]
+[zk: 116.31.122.111:2181(CONNECTED) 206] ls /ylzktest/lock/lock2/locks
+[]
+[zk: 116.31.122.111:2181(CONNECTED) 207] ls /ylzktest/lock/lock2/leases
+[_c_c851f7f5-0cf2-42c3-91d4-663122794a5a-lease-0000000000]
+[zk: 116.31.122.111:2181(CONNECTED) 208] ls /ylzktest/lock/lock2/leases/_c_c851f7f5-0cf2-42c3-91d4-663122794a5a-lease-0000000000
+[]
+[zk: 116.31.122.111:2181(CONNECTED) 209] get /ylzktest/lock/lock2/leases/_c_c851f7f5-0cf2-42c3-91d4-663122794a5a-lease-0000000000
+172.19.43.162
+cZxid = 0x904b4f600
+ctime = Wed Jun 29 19:46:08 CST 2016
+mZxid = 0x904b4f600
+mtime = Wed Jun 29 19:46:08 CST 2016
+pZxid = 0x904b4f600
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x2549ad85e56d451
+dataLength = 13
+numChildren = 0
+
+

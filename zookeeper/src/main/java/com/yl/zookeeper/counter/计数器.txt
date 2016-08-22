@@ -1,0 +1,25 @@
+# 计数器
+
+# 为开始运行前
+[zk: 116.31.122.111:2181(CONNECTED) 63] ls /ylzktest
+[test4, test5, test2, test3, barrier, lock, leaderSelect, test1, queue]
+# 开始运行时会自动创建 znode
+[zk: 116.31.122.111:2181(CONNECTED) 64] ls /ylzktest
+[test4, test5, test2, test3, barrier, lock, leaderSelect, counter, test1, queue]
+# 验证没有子节点
+[zk: 116.31.122.111:2181(CONNECTED) 65] ls /ylzktest/counter
+[]
+# 在关闭 curatorframwork 后 发现是有内容的
+[zk: 116.31.122.111:2181(CONNECTED) 66] get /ylzktest/counter
+
+cZxid = 0x9052335bd
+ctime = Mon Jul 04 15:08:51 CST 2016
+mZxid = 0x9052335bd
+mtime = Mon Jul 04 15:08:51 CST 2016
+pZxid = 0x9052335bd
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 4
+numChildren = 0

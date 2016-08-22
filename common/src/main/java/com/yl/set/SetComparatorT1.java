@@ -3,9 +3,7 @@ package com.yl.set;
 import com.yl.entity.VideoAnchor;
 
 import java.io.Serializable;
-import java.util.Comparator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Created by Administrator on 2016/3/24.
@@ -22,6 +20,27 @@ public class SetComparatorT1 {
         for(VideoAnchor ele: set){
             System.out.println(ele.toString());
         }
+
+        // 排序
+        sort();
+    }
+
+    private static void sort(){
+        List<VideoAnchor> list = new ArrayList<>();
+        list.add(new VideoAnchor(1, 21));
+        list.add(new VideoAnchor(2, 5));
+        list.add(new VideoAnchor(3, 4));
+        list.add(new VideoAnchor(4, 8));
+
+        // 排序
+        Collections.sort(list, new VideoAnchorComparator());
+
+        // 打印
+        System.out.println("------------sort-result----------------------");
+        for(VideoAnchor videoAnchor: list){
+            System.out.println(videoAnchor.toString());
+        }
+
     }
 
 }

@@ -1,0 +1,160 @@
+# DistributedQueue
+[zk: 116.31.122.111:2181(CONNECTED) 225] ls /ylzktest/queue
+[]
+# 每个入队列的是创建了个 持久化的顺序节点
+[zk: 116.31.122.111:2181(CONNECTED) 226] ls /ylzktest/queue
+[queue-0000000009]
+[zk: 116.31.122.111:2181(CONNECTED) 228] ls /ylzktest/queue
+[queue-0000000009, queue-0000000010]
+[zk: 116.31.122.111:2181(CONNECTED) 229] ls /ylzktest/queue/queue-0000000009
+[]
+[zk: 116.31.122.111:2181(CONNECTED) 230] ls /ylzktest/queue
+[queue-0000000009, queue-0000000012, queue-0000000011, queue-0000000010]
+# 验证是持久化节点，data 就是序列化后的value值
+[zk: 116.31.122.111:2181(CONNECTED) 231] get /ylzktest/queue/queue-0000000012
+test_4
+cZxid = 0x904b62044
+ctime = Wed Jun 29 20:55:09 CST 2016
+mZxid = 0x904b62044
+mtime = Wed Jun 29 20:55:09 CST 2016
+pZxid = 0x904b62044
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 16
+numChildren = 0
+# 9已经被消费，按序号由小到大消费
+[zk: 116.31.122.111:2181(CONNECTED) 232] ls /ylzktest/queue
+[queue-0000000014, queue-0000000013, queue-0000000012, queue-0000000011, queue-0000000010, queue-0000000015]
+[zk: 116.31.122.111:2181(CONNECTED) 233] ls /ylzktest/queue
+[queue-0000000014, queue-0000000013, queue-0000000012, queue-0000000011, queue-0000000015]
+[zk: 116.31.122.111:2181(CONNECTED) 234] get /ylzktest/queue/queue-0000000013
+test_5
+cZxid = 0x904b62091
+ctime = Wed Jun 29 20:55:14 CST 2016
+mZxid = 0x904b62091
+mtime = Wed Jun 29 20:55:14 CST 2016
+pZxid = 0x904b62091
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 16
+numChildren = 0
+[zk: 116.31.122.111:2181(CONNECTED) 235] ls /ylzktest/queue
+[queue-0000000014, queue-0000000013, queue-0000000012, queue-0000000015]
+[zk: 116.31.122.111:2181(CONNECTED) 236] ls /ylzktest/queue
+[queue-0000000014, queue-0000000013, queue-0000000015]
+[zk: 116.31.122.111:2181(CONNECTED) 237] ls /ylzktest/queue
+[queue-0000000014, queue-0000000015]
+[zk: 116.31.122.111:2181(CONNECTED) 238] ls /ylzktest/queue
+[queue-0000000015]
+[zk: 116.31.122.111:2181(CONNECTED) 242] ls /ylzktest/queue
+[]
+
+
+#####
+# DistributedIdQueue
+# 未运行前
+[zk: 116.31.122.111:2181(CONNECTED) 250] ls /ylzktest/queue
+[]
+# 开始运行，逐渐创建
+[zk: 116.31.122.111:2181(CONNECTED) 251] ls /ylzktest/queue
+[queue-|id_3|0000000019, queue-|id_2|0000000018, queue-|id_1|0000000017]
+[zk: 116.31.122.111:2181(CONNECTED) 252] ls /ylzktest/queue
+[queue-|id_3|0000000019, queue-|id_2|0000000018, queue-|id_5|0000000021, queue-|id_4|0000000020, queue-|id_1|0000000017]
+[zk: 116.31.122.111:2181(CONNECTED) 253] ls /ylzktest/queue
+[queue-|id_3|0000000019, queue-|id_6|0000000022, queue-|id_2|0000000018, queue-|id_5|0000000021, queue-|id_4|0000000020, queue-|id_1|0000000017]
+# 创建完全
+[zk: 116.31.122.111:2181(CONNECTED) 256] ls /ylzktest/queue
+[queue-|id_3|0000000019, queue-|id_6|0000000022, queue-|id_2|0000000018, queue-|id_5|0000000021, queue-|id_7|0000000023, queue-|id_1|0000000017, queue-|id_4|0000000020]
+# 删除中
+[zk: 116.31.122.111:2181(CONNECTED) 259] ls /ylzktest/queue
+[queue-|id_6|0000000022, queue-|id_2|0000000018, queue-|id_5|0000000021, queue-|id_7|0000000023, queue-|id_1|0000000017]
+# 消费中
+[zk: 116.31.122.111:2181(CONNECTED) 260] ls /ylzktest/queue
+[queue-|id_2|0000000018, queue-|id_1|0000000017]
+# 消费中
+[zk: 116.31.122.111:2181(CONNECTED) 273] ls /ylzktest/queue
+[queue-|id_2|0000000018]
+# 消费结束
+[zk: 116.31.122.111:2181(CONNECTED) 274] ls /ylzktest/queue
+[]
+#####
+
+#####
+# DistributedPriorityQueue
+[zk: 116.31.122.111:2181(CONNECTED) 277] ls /ylzktest/queue
+[]
+# 第一个已经被消费了，也是按编号从小到大消费(和优先级的顺序一致)
+[zk: 116.31.122.111:2181(CONNECTED) 278] ls /ylzktest/queue
+[queue-1000000040000000027, queue-1000000030000000026, queue-1000000020000000025]
+[zk: 116.31.122.111:2181(CONNECTED) 280] ls /ylzktest/queue/queue-1000000030000000026
+[]
+# 注意value值
+[zk: 116.31.122.111:2181(CONNECTED) 281] get /ylzktest/queue/queue-1000000030000000026
+test_3
+cZxid = 0x904b6da49
+ctime = Wed Jun 29 21:38:51 CST 2016
+mZxid = 0x904b6da49
+mtime = Wed Jun 29 21:38:51 CST 2016
+pZxid = 0x904b6da49
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 16
+numChildren = 0
+[zk: 116.31.122.111:2181(CONNECTED) 285] get /ylzktest/queue/queue-1000000040000000027
+test_4
+cZxid = 0x904b6da4a
+ctime = Wed Jun 29 21:38:51 CST 2016
+mZxid = 0x904b6da4a
+mtime = Wed Jun 29 21:38:51 CST 2016
+pZxid = 0x904b6da4a
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 16
+numChildren = 0
+# 按编号逐渐消费
+[zk: 116.31.122.111:2181(CONNECTED) 282] ls /ylzktest/queue
+[queue-1000000040000000027, queue-1000000030000000026]
+[zk: 116.31.122.111:2181(CONNECTED) 284] ls /ylzktest/queue
+[queue-1000000040000000027]
+[zk: 116.31.122.111:2181(CONNECTED) 290] ls /ylzktest/queue
+[]
+#####
+
+####
+# DistributedDelayQueue
+# 从日志观察消费接口会阻塞住，如果消息不可见
+[zk: 116.31.122.111:2181(CONNECTED) 303] ls /ylzktest/queue
+[]
+# 启动后，这些是立即可以查到的
+[zk: 116.31.122.111:2181(CONNECTED) 304] ls /ylzktest/queue
+[queue-|1559C752EFA|0000000033, queue-|1559C74E0DA|0000000032, queue-|1559C7492B8|0000000031]
+# 观察日志，等了好一会，才出现消费函数的日志打印；说明加上时间后，在时间没到之前，消费函数是阻塞的;看得出是按序号消费的
+[zk: 116.31.122.111:2181(CONNECTED) 306] ls /ylzktest/queue
+[queue-|1559C752EFA|0000000033, queue-|1559C74E0DA|0000000032]
+# 注意值
+[zk: 116.31.122.111:2181(CONNECTED) 307] get /ylzktest/queue/queue-|1559C752EFA|0000000033
+test_3
+cZxid = 0x904b72b80
+ctime = Wed Jun 29 21:58:20 CST 2016
+mZxid = 0x904b72b80
+mtime = Wed Jun 29 21:58:20 CST 2016
+pZxid = 0x904b72b80
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 16
+numChildren = 0
+[zk: 116.31.122.111:2181(CONNECTED) 309] ls /ylzktest/queue
+[]
+####
+
+

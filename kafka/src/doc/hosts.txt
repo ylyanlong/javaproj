@@ -1,0 +1,16 @@
+116.31.122.111 node1
+116.31.122.112 node2
+116.31.122.113 node3
+116.31.122.111 storm.supervisor1
+116.31.122.112 storm.supervisor2
+14.152.33.208 storm.supervisor3
+116.31.122.113 storm.nimbus
+
+116.31.122.111 kafka1
+116.31.122.112 kafka2
+14.215.104.8 kafka3
+14.215.104.9 kafka4
+
+14.152.33.211    master-hadoop
+14.152.33.210    slave1-hadoop
+14.152.33.209    slave2-hadoop

@@ -23,6 +23,7 @@
         <module>spring-mybatis</module>
         <module>zookeeper</module>
         <module>hadoop</module>
+        <module>kafka</module>
     </modules>
 
     <properties>
@@ -45,6 +46,8 @@
 
         <spring.data.redis.version>1.7.1.RELEASE</spring.data.redis.version>
         <jedis.version>2.8.0</jedis.version>
+
+        <kafka.version>0.9.0.1</kafka.version>
     </properties>
 
     <dependencyManagement>
@@ -195,6 +198,25 @@
                 <version>${jedis.version}</version>
             </dependency>
             <!--redis end-->
+
+
+            <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka_2.11 -->
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka_2.11</artifactId>
+                <version>${kafka.version}</version>
+                <!--<exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>-->
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

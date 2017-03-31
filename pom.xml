@@ -24,6 +24,7 @@
         <module>zookeeper</module>
         <module>hadoop</module>
         <module>kafka</module>
+        <module>protobuf</module>
     </modules>
 
     <properties>

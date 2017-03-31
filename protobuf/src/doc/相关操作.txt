@@ -1,0 +1,15 @@
+1, window 下 下载exe文件
+https://github.com/google/protobuf
+
+2， 工程信息见本工程
+
+3，定义好 .proto 文件
+
+4，进入 exe 的目录，执行cmd 命令
+D:\protobuf>protoc-2.5.0-windows-x86_32.exe -I=E:\PROGRAM\git\javaproj\protobuf\src\main\java\com\yl\socket\pro
+tobuf\proto   --java_out=./ E:\PROGRAM\git\javaproj\protobuf\src\main\java\com\yl\socket\protobuf\proto\person-
+entity.proto
+
+5, 将生成的 java 文件 拷贝到工程里面去
+
+6，运行工程里面的main 即可
